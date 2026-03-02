@@ -1,0 +1,99 @@
+{
+  "case_id": "medtech_long_80",
+  "turns": 80,
+  "mode": "openclaw-real-reset-3arm",
+  "control_session_id": "ab-c-reset-cddd0a",
+  "experiment_session_id": "ab-e-reset-f80a9e",
+  "reset_control_reply": "ACK — reset received. I’ll treat prior turns as cleared and continue from a fresh state.",
+  "reset_experiment_reply": "ACK — context reset.",
+  "control_accuracy": 0.0,
+  "experiment_accuracy": 0.6,
+  "guarded_accuracy": 0.6,
+  "control_recall": 0.0,
+  "experiment_recall": 0.6,
+  "guarded_recall": 0.6,
+  "control_avg_ms": 3144.4,
+  "experiment_avg_ms": 2738.2,
+  "guarded_avg_ms": 5882.6,
+  "rows": [
+    {
+      "query": "What is the current primary endpoint target now?",
+      "expected": [
+        "94.2%"
+      ],
+      "control_answer": "I don’t have a primary endpoint target in the **current post-reset context** yet.\n\nIf you want, provide it now and I’ll track it from this point forward.",
+      "experiment_answer": "The current primary endpoint target is **AFib sensitivity ≥ 94.2%**.",
+      "guarded_answer": "The current primary endpoint target is **AFib sensitivity ≥ 94.2%**.",
+      "control_hit": false,
+      "experiment_hit": true,
+      "guarded_hit": true,
+      "control_ms": 3735,
+      "experiment_ms": 3432,
+      "guarded_ms": 7167
+    },
+    {
+      "query": "Do we allow cloud PHI export right now?",
+      "expected": [
+        "no cloud PHI export",
+        "legal sign-off"
+      ],
+      "control_answer": "From the current **post-reset** context, I don’t have a policy recorded yet—so I can’t confirm that cloud PHI export is allowed.\n\nPlease restate the current rule, and I’ll apply it going forward.",
+      "experiment_answer": "Cloud PHI export is blocked right now, except to a legal-approved redacted sandbox.",
+      "guarded_answer": "From the current **post-reset** context, I don’t have a policy recorded yet—so I can’t confirm that cloud PHI export is allowed.\n\nPlease restate the current rule, and I’ll apply it going forward.",
+      "control_hit": false,
+      "experiment_hit": false,
+      "guarded_hit": false,
+      "control_ms": 2479,
+      "experiment_ms": 1821,
+      "guarded_ms": 4300
+    },
+    {
+      "query": "What timeout policy do we use?",
+      "expected": [
+        "20 seconds",
+        "graceful degrade"
+      ],
+      "control_answer": "I don’t have a timeout policy recorded in the **post-reset** context yet.\n\nShare the policy, and I’ll track it from here.",
+      "experiment_answer": "We use a hard timeout of 20 seconds with graceful degradation.",
+      "guarded_answer": "I don’t have a timeout policy recorded in the **post-reset** context yet.\n\nShare the policy, and I’ll track it from here.",
+      "control_hit": false,
+      "experiment_hit": false,
+      "guarded_hit": false,
+      "control_ms": 3697,
+      "experiment_ms": 2436,
+      "guarded_ms": 6133
+    },
+    {
+      "query": "What retention period is currently set?",
+      "expected": [
+        "21 days"
+      ],
+      "control_answer": "I don’t have a retention period recorded in the **post-reset** context yet.\n\nIf you share it now, I’ll track it as the current setting.",
+      "experiment_answer": "The current retention period is 21 days for debug traces.",
+      "guarded_answer": "The current retention period is 21 days for debug traces.",
+      "control_hit": false,
+      "experiment_hit": true,
+      "guarded_hit": true,
+      "control_ms": 2745,
+      "experiment_ms": 2425,
+      "guarded_ms": 5170
+    },
+    {
+      "query": "Which regulatory pathway and predicate are we using?",
+      "expected": [
+        "510(k)",
+        "K654321"
+      ],
+      "control_answer": "I don’t have a regulatory pathway/predicate recorded in the **post-reset** context yet.\n\nPlease restate it, and I’ll track it as current.",
+      "experiment_answer": "We are using the FDA 510(k) pathway with predicate K654321.",
+      "guarded_answer": "We are using the FDA 510(k) pathway with predicate K654321.",
+      "control_hit": false,
+      "experiment_hit": true,
+      "guarded_hit": true,
+      "control_ms": 3066,
+      "experiment_ms": 3577,
+      "guarded_ms": 6643
+    }
+  ],
+  "generated_at": 1772369829
+}

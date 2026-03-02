@@ -1,0 +1,67 @@
+{
+  "case_id": "medtech_long_80",
+  "turns": 80,
+  "control_session_id": "ab-control-2a8c0413",
+  "experiment_session_id": "ab-exp-185ce4fb",
+  "compact_control_reply": "**Compact state**\n\n- `reg_path`: FDA 510(k) predicate K654321\n- `primary`: AFib sensitivity >= 94.2% (**current**, 93.5% deprecated)\n- `secondary`: false alarm < 0.12/hour\n- `timeout`: hard timeout 20 seconds with graceful degrade\n- `retention`: debug trace retention 21 days\n- `constraint`: PHI export only to legal-approved redacted sandbox; production cloud blocked\n- `ignored_noise_turns_count`: 67",
+  "compact_experiment_reply": "Compact session state:\n\n- `reg_path`: FDA 510(k) predicate K654321\n- `primary`: AFib sensitivity >= 94.2% (93.5% deprecated)\n- `secondary`: false alarm < 0.12/hour\n- `timeout`: hard timeout 20 seconds with graceful degrade\n- `retention`: debug trace retention 21 days\n- `constraint`: PHI export allowed only to legal-approved redacted sandbox; production cloud blocked until legal sign-off\n- Other turns: noise about vendor emails, meeting slots, formatting preferences.",
+  "control_recall": 0.8,
+  "experiment_recall": 0.6,
+  "delta": -0.2,
+  "rows": [
+    {
+      "query": "What is the current primary endpoint target now?",
+      "expected": [
+        "94.2%"
+      ],
+      "control_answer": "**AFib sensitivity >= 94.2%**.",
+      "experiment_answer": "The current primary endpoint target is **AFib sensitivity ≥ 94.2%**.",
+      "control_hit": true,
+      "experiment_hit": true
+    },
+    {
+      "query": "Do we allow cloud PHI export right now?",
+      "expected": [
+        "no cloud PHI export",
+        "legal sign-off"
+      ],
+      "control_answer": "Only to a **legal-approved redacted sandbox**. **Production cloud export is blocked**.",
+      "experiment_answer": "Cloud PHI export is **not** allowed to production right now, and is only permitted to a legal-approved redacted sandbox.",
+      "control_hit": false,
+      "experiment_hit": false
+    },
+    {
+      "query": "What timeout policy do we use?",
+      "expected": [
+        "20 seconds",
+        "graceful degrade"
+      ],
+      "control_answer": "**Hard timeout at 20 seconds, with graceful degrade.**",
+      "experiment_answer": "We use a **hard timeout of 20 seconds with graceful degradation**.",
+      "control_hit": true,
+      "experiment_hit": false
+    },
+    {
+      "query": "What retention period is currently set?",
+      "expected": [
+        "21 days"
+      ],
+      "control_answer": "**Debug trace retention is 21 days.**",
+      "experiment_answer": "The currently set retention period is **21 days for debug traces**.",
+      "control_hit": true,
+      "experiment_hit": true
+    },
+    {
+      "query": "Which regulatory pathway and predicate are we using?",
+      "expected": [
+        "510(k)",
+        "K654321"
+      ],
+      "control_answer": "**FDA 510(k), predicate K654321.**",
+      "experiment_answer": "We are using the **FDA 510(k) regulatory pathway with predicate K654321**.",
+      "control_hit": true,
+      "experiment_hit": true
+    }
+  ],
+  "generated_at": 1772342316
+}

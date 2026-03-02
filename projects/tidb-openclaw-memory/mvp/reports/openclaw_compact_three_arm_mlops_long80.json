@@ -1,0 +1,118 @@
+{
+  "case_id": "mlops_long_80",
+  "turns": 80,
+  "mode": "openclaw-real-compact-3arm-strict-semantic",
+  "control_session_id": "ab-c-4afe7d",
+  "experiment_session_id": "ab-e-f05fa3",
+  "compact_control_reply": "Compact state:\n- default_model_route: **gpt-5.3-codex**\n- fallback_model_route: **gpt-4.1-mini** only for **latency spikes** when **p95 > 4.2s**\n- p95_latency_objective: **< 4.2s**\n- hard_timeout: **20s** (graceful degrade unchanged)\n- pii_masking_required: **true** (before trace persistence)\n- debug_trace_retention: **14 days**\n- rollback_trigger: **error rate increase > 2.2%**\n- canary: **mandatory**, minimum **10%** before full production\n- canary exception: allowed only with **incident commander approval**\n- open_issue: **post-compaction continuity scoring calibration for semantic equivalence**",
+  "compact_experiment_reply": "**FINAL_POLICY**\n- **default_model_route:** `gpt-5.3-codex`\n- **fallback_model_route:** `gpt-4.1-mini`\n- **fallback_condition:** latency spikes only (operationally: `p95_latency_s > 4.2`; not for quality dips)\n- **p95_objective_s:** `4.2`\n- **hard_timeout_s:** `20`\n- **pii_masking_required:** `true`\n- **debug_trace_retention_days:** `14`\n- **rollback_trigger_error_rate_increase_pct:** `2.2`\n- **canary_exception:** emergency patch may skip canary only with incident commander approval\n\n**OPEN_ISSUES**\n- Post-compaction continuity scoring calibration for semantic equivalence",
+  "control_accuracy_strict": 1.0,
+  "experiment_accuracy_strict": 0.8,
+  "guarded_accuracy_strict": 1.0,
+  "control_accuracy_semantic": 1.0,
+  "experiment_accuracy_semantic": 0.8,
+  "guarded_accuracy_semantic": 1.0,
+  "control_recall": 1.0,
+  "experiment_recall": 0.8,
+  "guarded_recall": 1.0,
+  "control_avg_ms": 2401.6,
+  "experiment_avg_ms": 2607.8,
+  "guarded_avg_ms": 5009.4,
+  "rows": [
+    {
+      "query": "What is the current hard timeout policy?",
+      "expected": [
+        "20 seconds",
+        "graceful degrade"
+      ],
+      "control_answer": "Current hard timeout policy: **20 seconds**, with **graceful degrade** response unchanged.",
+      "experiment_answer": "The current hard timeout policy is **20 seconds with graceful degrade unchanged**.",
+      "guarded_answer": "Current hard timeout policy: **20 seconds**, with **graceful degrade** response unchanged.",
+      "control_hit_strict": true,
+      "experiment_hit_strict": true,
+      "guarded_hit_strict": true,
+      "control_hit_semantic": true,
+      "experiment_hit_semantic": true,
+      "guarded_hit_semantic": true,
+      "control_ms": 2142,
+      "experiment_ms": 3690,
+      "guarded_ms": 5832
+    },
+    {
+      "query": "What is our current p95 latency objective?",
+      "expected": [
+        "4.2",
+        "seconds"
+      ],
+      "control_answer": "Your current p95 latency objective is **< 4.2 seconds**.",
+      "experiment_answer": "Our current p95 latency objective is **under 4.2 seconds**.",
+      "guarded_answer": "Your current p95 latency objective is **< 4.2 seconds**.",
+      "control_hit_strict": true,
+      "experiment_hit_strict": true,
+      "guarded_hit_strict": true,
+      "control_hit_semantic": true,
+      "experiment_hit_semantic": true,
+      "guarded_hit_semantic": true,
+      "control_ms": 1918,
+      "experiment_ms": 2326,
+      "guarded_ms": 4244
+    },
+    {
+      "query": "What is the rollback trigger?",
+      "expected": [
+        "error rate",
+        "2.2%"
+      ],
+      "control_answer": "Rollback is triggered when the **error rate increase exceeds 2.2%**.",
+      "experiment_answer": "The rollback trigger is an **error-rate increase greater than 2.2%**.",
+      "guarded_answer": "Rollback is triggered when the **error rate increase exceeds 2.2%**.",
+      "control_hit_strict": true,
+      "experiment_hit_strict": false,
+      "guarded_hit_strict": true,
+      "control_hit_semantic": true,
+      "experiment_hit_semantic": false,
+      "guarded_hit_semantic": true,
+      "control_ms": 2256,
+      "experiment_ms": 2575,
+      "guarded_ms": 4831
+    },
+    {
+      "query": "What is the base-tier debug trace retention?",
+      "expected": [
+        "14 days"
+      ],
+      "control_answer": "Base-tier debug trace retention is **14 days**.",
+      "experiment_answer": "The base-tier debug trace retention is **14 days**.",
+      "guarded_answer": "Base-tier debug trace retention is **14 days**.",
+      "control_hit_strict": true,
+      "experiment_hit_strict": true,
+      "guarded_hit_strict": true,
+      "control_hit_semantic": true,
+      "experiment_hit_semantic": true,
+      "guarded_hit_semantic": true,
+      "control_ms": 3499,
+      "experiment_ms": 1574,
+      "guarded_ms": 5073
+    },
+    {
+      "query": "When do we use fallback model and which one is it?",
+      "expected": [
+        "latency spikes",
+        "gpt-4.1-mini"
+      ],
+      "control_answer": "Use the fallback model during **latency spikes** (when **p95 latency exceeds 4.2s**), and the fallback model is **gpt-4.1-mini**.",
+      "experiment_answer": "We use the fallback model **gpt-4.1-mini** only during latency spikes (i.e., when p95 latency exceeds the current threshold).",
+      "guarded_answer": "Use the fallback model during **latency spikes** (when **p95 latency exceeds 4.2s**), and the fallback model is **gpt-4.1-mini**.",
+      "control_hit_strict": true,
+      "experiment_hit_strict": true,
+      "guarded_hit_strict": true,
+      "control_hit_semantic": true,
+      "experiment_hit_semantic": true,
+      "guarded_hit_semantic": true,
+      "control_ms": 2193,
+      "experiment_ms": 2874,
+      "guarded_ms": 5067
+    }
+  ],
+  "generated_at": 1772360455
+}

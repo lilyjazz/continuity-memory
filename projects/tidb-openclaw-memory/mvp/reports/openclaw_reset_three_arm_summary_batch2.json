@@ -1,0 +1,23 @@
+[
+  {
+    "case_id": "medtech_long_80",
+    "out": "/home/ubuntu/.openclaw/workspace/projects/tidb-openclaw-memory/mvp/reports/openclaw_reset_three_arm_medtech_long_80.json",
+    "control": 0.0,
+    "experiment": 0.6,
+    "guarded": 0.6
+  },
+  {
+    "case_id": "finops_long_80",
+    "out": "/home/ubuntu/.openclaw/workspace/projects/tidb-openclaw-memory/mvp/reports/openclaw_reset_three_arm_finops_long_80.json",
+    "control": 0.0,
+    "experiment": 0.6,
+    "guarded": 0.6
+  },
+  {
+    "case_id": "mlops_long_80",
+    "out": "/home/ubuntu/.openclaw/workspace/projects/tidb-openclaw-memory/mvp/reports/openclaw_reset_three_arm_mlops_long_80.json",
+    "control": 0.0,
+    "experiment": 0.8,
+    "guarded": 0.8
+  }
+]

@@ -1,0 +1,68 @@
+{
+  "case_id": "medtech_long_80",
+  "turns": 80,
+  "mode": "openclaw-real-reset-single-case",
+  "control_session_id": "ab-control-reset-aac458e5",
+  "experiment_session_id": "ab-exp-reset-4495652c",
+  "reset_control_reply": "Reset acknowledged. Starting fresh from this point.",
+  "reset_experiment_reply": "Reset acknowledged.\nI’ll treat prior turns as cleared and only use turns after this message.",
+  "control_recall": 0.0,
+  "experiment_recall": 0.6,
+  "delta": 0.6,
+  "rows": [
+    {
+      "query": "What is the current primary endpoint target now?",
+      "expected": [
+        "94.2%"
+      ],
+      "control_answer": "I don’t have a primary endpoint target in the post-reset context yet.\n\nIf you want, share it now and I’ll track it from here.",
+      "experiment_answer": "The current primary endpoint target is **AFib sensitivity ≥ 94.2%**.",
+      "control_hit": false,
+      "experiment_hit": true
+    },
+    {
+      "query": "Do we allow cloud PHI export right now?",
+      "expected": [
+        "no cloud PHI export",
+        "legal sign-off"
+      ],
+      "control_answer": "I can’t determine that from the current post-reset context.\n\nRight now, I have no policy state carried over after `/reset`. If you share the current rule, I’ll apply it consistently.",
+      "experiment_answer": "Cloud PHI export is **not** allowed right now except to a **legal-approved redacted sandbox**, while production cloud export remains blocked.",
+      "control_hit": false,
+      "experiment_hit": false
+    },
+    {
+      "query": "What timeout policy do we use?",
+      "expected": [
+        "20 seconds",
+        "graceful degrade"
+      ],
+      "control_answer": "I don’t have a timeout policy in the current post-reset context yet.\n\nShare the policy, and I’ll use it going forward.",
+      "experiment_answer": "The timeout policy is a **hard timeout of 20 seconds with graceful degradation**.",
+      "control_hit": false,
+      "experiment_hit": false
+    },
+    {
+      "query": "What retention period is currently set?",
+      "expected": [
+        "21 days"
+      ],
+      "control_answer": "I don’t have a retention period set in the current post-reset context.",
+      "experiment_answer": "The currently set retention period is **21 days for debug traces**.",
+      "control_hit": false,
+      "experiment_hit": true
+    },
+    {
+      "query": "Which regulatory pathway and predicate are we using?",
+      "expected": [
+        "510(k)",
+        "K654321"
+      ],
+      "control_answer": "I don’t have a regulatory pathway or predicate in the current post-reset context yet.",
+      "experiment_answer": "We are using the **FDA 510(k) pathway with predicate K654321**.",
+      "control_hit": false,
+      "experiment_hit": true
+    }
+  ],
+  "generated_at": 1772345554
+}

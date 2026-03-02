@@ -1,0 +1,100 @@
+{
+  "case_id": "mlops_long_80",
+  "turns": 80,
+  "mode": "openclaw-real-reset-3arm",
+  "control_session_id": "ab-c-reset-8fc2d2",
+  "experiment_session_id": "ab-e-reset-cfaf28",
+  "reset_control_reply": "ACK — context reset for this session.",
+  "reset_experiment_reply": "ACK — context reset for this benchmark. I’ll only use turns after this message.",
+  "control_accuracy": 0.0,
+  "experiment_accuracy": 0.8,
+  "guarded_accuracy": 0.8,
+  "control_recall": 0.0,
+  "experiment_recall": 0.8,
+  "guarded_recall": 0.8,
+  "control_avg_ms": 2714.0,
+  "experiment_avg_ms": 2210.0,
+  "guarded_avg_ms": 4924.0,
+  "rows": [
+    {
+      "query": "What is the current hard timeout policy?",
+      "expected": [
+        "20 seconds",
+        "graceful degrade"
+      ],
+      "control_answer": "No hard timeout policy is currently set in the post-reset context.",
+      "experiment_answer": "The current hard timeout policy is **20 seconds**, with graceful degrade behavior unchanged.",
+      "guarded_answer": "The current hard timeout policy is **20 seconds**, with graceful degrade behavior unchanged.",
+      "control_hit": false,
+      "experiment_hit": true,
+      "guarded_hit": true,
+      "control_ms": 4692,
+      "experiment_ms": 2990,
+      "guarded_ms": 7682
+    },
+    {
+      "query": "What is our current p95 latency objective?",
+      "expected": [
+        "4.2",
+        "seconds"
+      ],
+      "control_answer": "No P95 latency objective is currently set in the post-reset context.",
+      "experiment_answer": "The current p95 latency objective is **under 4.2 seconds**.",
+      "guarded_answer": "The current p95 latency objective is **under 4.2 seconds**.",
+      "control_hit": false,
+      "experiment_hit": true,
+      "guarded_hit": true,
+      "control_ms": 2659,
+      "experiment_ms": 1939,
+      "guarded_ms": 4598
+    },
+    {
+      "query": "What is the rollback trigger?",
+      "expected": [
+        "error rate",
+        "2.2%"
+      ],
+      "control_answer": "No rollback trigger is currently set in the post-reset context.",
+      "experiment_answer": "The rollback trigger is an **error-rate increase greater than 2.2%**.",
+      "guarded_answer": "No rollback trigger is currently set in the post-reset context.",
+      "control_hit": false,
+      "experiment_hit": false,
+      "guarded_hit": false,
+      "control_ms": 2408,
+      "experiment_ms": 1989,
+      "guarded_ms": 4397
+    },
+    {
+      "query": "What is the base-tier debug trace retention?",
+      "expected": [
+        "14 days"
+      ],
+      "control_answer": "No base-tier debug trace retention is currently set in the post-reset context.",
+      "experiment_answer": "Base-tier debug trace retention is **14 days**.",
+      "guarded_answer": "Base-tier debug trace retention is **14 days**.",
+      "control_hit": false,
+      "experiment_hit": true,
+      "guarded_hit": true,
+      "control_ms": 1694,
+      "experiment_ms": 2002,
+      "guarded_ms": 3696
+    },
+    {
+      "query": "When do we use fallback model and which one is it?",
+      "expected": [
+        "latency spikes",
+        "gpt-4.1-mini"
+      ],
+      "control_answer": "No fallback-model policy is currently set in the post-reset context (no condition and no model specified).",
+      "experiment_answer": "We use the fallback model **gpt-4.1-mini** only during latency spikes (i.e., when p95 exceeds the threshold, now aligned to the <4.2s objective), not for quality dips.",
+      "guarded_answer": "We use the fallback model **gpt-4.1-mini** only during latency spikes (i.e., when p95 exceeds the threshold, now aligned to the <4.2s objective), not for quality dips.",
+      "control_hit": false,
+      "experiment_hit": true,
+      "guarded_hit": true,
+      "control_ms": 2117,
+      "experiment_ms": 2130,
+      "guarded_ms": 4247
+    }
+  ],
+  "generated_at": 1772372166
+}

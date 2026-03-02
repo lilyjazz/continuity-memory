@@ -1,0 +1,99 @@
+{
+  "case_id": "finops_long_80",
+  "turns": 80,
+  "mode": "openclaw-real-reset-3arm",
+  "control_session_id": "ab-c-reset-c9d3ed",
+  "experiment_session_id": "ab-e-reset-ad5daa",
+  "reset_control_reply": "ACK — reset received. I’ll treat prior turns as cleared and only use context from after this point.",
+  "reset_experiment_reply": "ACK. Context reset noted.",
+  "control_accuracy": 0.0,
+  "experiment_accuracy": 0.6,
+  "guarded_accuracy": 0.6,
+  "control_recall": 0.0,
+  "experiment_recall": 0.6,
+  "guarded_recall": 0.6,
+  "control_avg_ms": 3047.6,
+  "experiment_avg_ms": 3201.4,
+  "guarded_avg_ms": 6249.0,
+  "rows": [
+    {
+      "query": "What is the current chargeback warning threshold?",
+      "expected": [
+        "1.1%",
+        "weekly"
+      ],
+      "control_answer": "I don’t have that value after the reset in this session context.\nPlease provide the threshold (or the policy block) and I’ll track it from here.",
+      "experiment_answer": "The current chargeback warning threshold is **1.1% weekly**.",
+      "guarded_answer": "The current chargeback warning threshold is **1.1% weekly**.",
+      "control_hit": false,
+      "experiment_hit": true,
+      "guarded_hit": true,
+      "control_ms": 5748,
+      "experiment_ms": 4425,
+      "guarded_ms": 10173
+    },
+    {
+      "query": "Do we ever allow payouts when sanctions are unresolved?",
+      "expected": [
+        "blocked",
+        "never bypassed"
+      ],
+      "control_answer": "I can’t determine that from post-reset context yet.\nIf you share the rule, I’ll apply it consistently going forward.",
+      "experiment_answer": "No—payouts are blocked immediately when sanctions are unresolved.",
+      "guarded_answer": "I can’t determine that from post-reset context yet.\nIf you share the rule, I’ll apply it consistently going forward.",
+      "control_hit": false,
+      "experiment_hit": false,
+      "guarded_hit": false,
+      "control_ms": 2624,
+      "experiment_ms": 2527,
+      "guarded_ms": 5151
+    },
+    {
+      "query": "What is the current rolling reserve policy?",
+      "expected": [
+        "8%",
+        "90 days"
+      ],
+      "control_answer": "I don’t have a rolling reserve policy in the post-reset context yet.\nShare the current policy (rate + duration + scope), and I’ll use that as authoritative.",
+      "experiment_answer": "The current rolling reserve policy is **8% for 90 days** for high-risk merchants.",
+      "guarded_answer": "The current rolling reserve policy is **8% for 90 days** for high-risk merchants.",
+      "control_hit": false,
+      "experiment_hit": true,
+      "guarded_hit": true,
+      "control_ms": 2432,
+      "experiment_ms": 1629,
+      "guarded_ms": 4061
+    },
+    {
+      "query": "What is the instant payout tenure rule?",
+      "expected": [
+        "< 90 days"
+      ],
+      "control_answer": "Not available from post-reset turns so far.\nPlease provide the tenure threshold rule, and I’ll track it as current policy.",
+      "experiment_answer": "Instant payout is disabled for merchants with tenure under 90 days.",
+      "guarded_answer": "Not available from post-reset turns so far.\nPlease provide the tenure threshold rule, and I’ll track it as current policy.",
+      "control_hit": false,
+      "experiment_hit": false,
+      "guarded_hit": false,
+      "control_ms": 2507,
+      "experiment_ms": 2507,
+      "guarded_ms": 5014
+    },
+    {
+      "query": "What is manual review SLA?",
+      "expected": [
+        "4 hours"
+      ],
+      "control_answer": "I don’t have a manual review SLA defined in the post-reset context yet.\nShare it once, and I’ll treat it as the active value.",
+      "experiment_answer": "The manual review SLA is 4 hours.",
+      "guarded_answer": "The manual review SLA is 4 hours.",
+      "control_hit": false,
+      "experiment_hit": true,
+      "guarded_hit": true,
+      "control_ms": 1927,
+      "experiment_ms": 4919,
+      "guarded_ms": 6846
+    }
+  ],
+  "generated_at": 1772370979
+}

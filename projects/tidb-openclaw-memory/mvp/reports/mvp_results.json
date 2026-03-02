@@ -1,0 +1,90 @@
+{
+  "total_cases": 10,
+  "baseline_accuracy": 0.0,
+  "mvp_accuracy": 0.8,
+  "delta": 0.8,
+  "elapsed_ms": 0,
+  "pass_gate": true,
+  "details": [
+    {
+      "case_id": "c1",
+      "expected": "concise style",
+      "baseline_answer": "无法从当前上下文确定。",
+      "mvp_answer": "concise style",
+      "baseline_hit": false,
+      "mvp_hit": true
+    },
+    {
+      "case_id": "c2",
+      "expected": "no fork OpenClaw",
+      "baseline_answer": "无法从当前上下文确定。",
+      "mvp_answer": "no fork OpenClaw",
+      "baseline_hit": false,
+      "mvp_hit": true
+    },
+    {
+      "case_id": "c3",
+      "expected": "compaction-safe continuity",
+      "baseline_answer": "无法从当前上下文确定。",
+      "mvp_answer": "compaction-safe continuity",
+      "baseline_hit": false,
+      "mvp_hit": true
+    },
+    {
+      "case_id": "c4",
+      "expected": "context truncation breaks continuity",
+      "baseline_answer": "无法从当前上下文确定。",
+      "mvp_answer": "context truncation breaks continuity",
+      "baseline_hit": false,
+      "mvp_hit": true
+    },
+    {
+      "case_id": "c5",
+      "expected": "hybrid phase",
+      "baseline_answer": "无法从当前上下文确定。",
+      "mvp_answer": "TiDB used in hybrid phase",
+      "baseline_hit": false,
+      "mvp_hit": true
+    },
+    {
+      "case_id": "c6",
+      "expected": "arbitrary follow-up",
+      "baseline_answer": "无法从当前上下文确定。",
+      "mvp_answer": "compaction-safe continuity",
+      "baseline_hit": false,
+      "mvp_hit": false
+    },
+    {
+      "case_id": "c7",
+      "expected": "document first",
+      "baseline_answer": "无法从当前上下文确定。",
+      "mvp_answer": "document first, then implementation",
+      "baseline_hit": false,
+      "mvp_hit": true
+    },
+    {
+      "case_id": "c8",
+      "expected": "continuity context block",
+      "baseline_answer": "无法从当前上下文确定。",
+      "mvp_answer": "inject continuity context block",
+      "baseline_hit": false,
+      "mvp_hit": true
+    },
+    {
+      "case_id": "c9",
+      "expected": "isolated",
+      "baseline_answer": "无法从当前上下文确定。",
+      "mvp_answer": "no fork OpenClaw",
+      "baseline_hit": false,
+      "mvp_hit": false
+    },
+    {
+      "case_id": "c10",
+      "expected": "restores key facts",
+      "baseline_answer": "无法从当前上下文确定。",
+      "mvp_answer": "anchor restores key facts",
+      "baseline_hit": false,
+      "mvp_hit": true
+    }
+  ]
+}

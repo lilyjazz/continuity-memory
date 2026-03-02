@@ -1,0 +1,18 @@
+{
+  "openclaw_compact_single_case_long80.json": {
+    "control_recall": 0.8,
+    "experiment_recall": 0.6,
+    "guarded_recall": 0.8,
+    "delta_exp_vs_control": -0.2,
+    "delta_guard_vs_control": 0.0,
+    "n": 5
+  },
+  "openclaw_reset_single_case_long80.json": {
+    "control_recall": 0.0,
+    "experiment_recall": 0.6,
+    "guarded_recall": 0.6,
+    "delta_exp_vs_control": 0.6,
+    "delta_guard_vs_control": 0.6,
+    "n": 5
+  }
+}

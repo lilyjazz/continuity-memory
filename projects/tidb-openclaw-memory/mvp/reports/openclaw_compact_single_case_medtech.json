@@ -1,0 +1,49 @@
+{
+  "mode": "openclaw-real-compact-single-case",
+  "case_id": "medtech_01",
+  "domain": "medical-device-regulatory",
+  "control_session_id": "ab-control-medtech_01-bc5e1797",
+  "experiment_session_id": "ab-exp-medtech_01-05b74cc1",
+  "compact_control_reply": "**Compact recap (session facts only):**\n\n- Product: wearable ECG patch for arrhythmia monitoring  \n- Regulatory path: FDA 510(k)  \n- Predicate: K123456  \n- Primary endpoint: AFib sensitivity ≥ 92%  \n- Secondary endpoint: false alarm rate < 0.15/hour  \n- Pilot study: 120 patients, 3 sites  \n- Risk control: skin irritation biocompatibility test per ISO 10993  \n- Data retention: raw ECG kept 24 months  \n- Security: encryption at rest must be AES-256  \n- Timeline: verification complete by Q3; 510(k) submission in Q4  \n- Governance decision: no cloud PHI export before legal sign-off  \n- Open issue: finalize adverse event adjudication workflow",
+  "compact_experiment_reply": "Compact recap (session-only facts):\n\n- Class II medical device submission for a **wearable ECG patch** (arrhythmia monitoring).\n- Regulatory path: **FDA 510(k)** with predicate **K123456**.\n- Primary endpoint: **AFib sensitivity ≥ 92%**.\n- Secondary endpoint: **false alarm rate < 0.15/hour**.\n- Pilot study: **120 patients**, **3 sites**.\n- Risk control: **ISO 10993 skin irritation biocompatibility** test required.\n- Data policy: retain **raw ECG for 24 months**.\n- Security: encryption at rest must be **AES-256**.\n- Timeline: **verification complete by Q3**, **submission in Q4**.\n- Decision: **no cloud PHI export before legal sign-off**.\n- Open issue: **finalize adverse event adjudication workflow**.",
+  "rows": [
+    {
+      "query": "What regulatory path did we choose?",
+      "expected": [
+        "510(k)",
+        "K123456"
+      ],
+      "control_answer": "You chose the **FDA 510(k)** regulatory pathway.",
+      "experiment_answer": "We chose the FDA 510(k) pathway using predicate device K123456.",
+      "control_hit": false,
+      "experiment_hit": true
+    },
+    {
+      "query": "What is our primary endpoint target?",
+      "expected": [
+        "sensitivity",
+        "92%"
+      ],
+      "control_answer": "**Primary endpoint target:** AFib detection sensitivity **≥ 92%**.",
+      "experiment_answer": "Our primary endpoint target is AFib detection sensitivity of at least 92%.",
+      "control_hit": true,
+      "experiment_hit": true
+    },
+    {
+      "query": "Any hard constraint on PHI export?",
+      "expected": [
+        "no cloud PHI export",
+        "legal sign-off"
+      ],
+      "control_answer": "Yes. Hard constraint: **no cloud PHI export before legal sign-off**.",
+      "experiment_answer": "Yes—there is a hard constraint that no cloud PHI export is allowed before legal sign-off.",
+      "control_hit": true,
+      "experiment_hit": true
+    }
+  ],
+  "control_recall": 0.6666666666666666,
+  "experiment_recall": 1.0,
+  "delta": 0.3333333333333333,
+  "disclosure": "Real OpenClaw /compact used. Experiment adds continuity-anchor prompt block.",
+  "generated_at": 1772340578
+}

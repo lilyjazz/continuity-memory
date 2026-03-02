@@ -1,0 +1,10 @@
+{"case_id":"c1","history":["Goal: prepare launch brief","Done: drafted outline","Decision: use concise style"],"question":"我们刚刚决定的文档风格是什么？","expected":"concise style"}
+{"case_id":"c2","history":["Constraint: no fork OpenClaw","In progress: build no-fork MVP","Next: finalize hookless flow"],"question":"我们现在的实现约束是什么？","expected":"no fork OpenClaw"}
+{"case_id":"c3","history":["Entity: project codename Atlas","Fact: target is compaction-safe continuity","Open question: local vs hybrid default"],"question":"这个项目主要目标是什么？","expected":"compaction-safe continuity"}
+{"case_id":"c4","history":["Done: wrote SPEC v0.2","Blocker: context truncation breaks continuity","Next: build MVP demo"],"question":"现在最大的阻塞点是什么？","expected":"context truncation breaks continuity"}
+{"case_id":"c5","history":["Decision: MVP local-only first","Fact: TiDB used in hybrid phase","Commitment: keep code separated"],"question":"TiDB 在当前 MVP 阶段是必须的吗？","expected":"hybrid phase"}
+{"case_id":"c6","history":["Goal: answer arbitrary follow-up after compaction","Done: defined continuity anchor","Constraint: low latency"],"question":"这个MVP核心目标是什么？","expected":"arbitrary follow-up"}
+{"case_id":"c7","history":["Entity: user Lux","Decision: document first, then implementation","Done: technical design drafted"],"question":"我们的执行顺序是什么？","expected":"document first"}
+{"case_id":"c8","history":["Fact: compaction may drop raw turns","Mitigation: inject continuity context block","Decision: no-fork first"],"question":"我们如何缓解 compaction 丢上下文？","expected":"continuity context block"}
+{"case_id":"c9","history":["Constraint: keep MVP code isolated","Decision: mvp folder standalone","Next: run quick eval"],"question":"代码组织上有什么约束？","expected":"isolated"}
+{"case_id":"c10","history":["Fact: baseline loses context after compaction","Fact: anchor restores key facts","Goal: continuity success over 80%"],"question":"为什么要用 anchor？","expected":"restores key facts"}

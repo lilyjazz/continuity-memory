@@ -1,0 +1,4 @@
+{
+  "summary": "Goal: prepare launch brief | Done: drafted outline | Decision: use concise style | Constraint: no fork OpenClaw | In progress: build no-fork MVP | Next: finalize hookless flow | Entity: project codename Atlas | Fact: target is compaction-safe continuity | Open question: local vs hybrid default | Done: wrote SPEC v0.2 | Blocker: context truncation breaks continuity | Next: build MVP demo | Decision: MVP local-only first | Fact: TiDB used in hybrid phase | Commitment: keep code separated | Goal: a",
+  "updated_at": 1772336602.448879
+}

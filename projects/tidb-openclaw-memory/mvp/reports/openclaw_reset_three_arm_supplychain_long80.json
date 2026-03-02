@@ -1,0 +1,99 @@
+{
+  "case_id": "supplychain_long_80",
+  "turns": 80,
+  "mode": "openclaw-real-reset-3arm",
+  "control_session_id": "ab-c-reset-b43350",
+  "experiment_session_id": "ab-e-reset-b3a5a3",
+  "reset_control_reply": "ACK — reset received. Starting fresh context from here.",
+  "reset_experiment_reply": "ACK — context reset. I’ll only use messages after this point.",
+  "control_accuracy": 0.0,
+  "experiment_accuracy": 0.8,
+  "guarded_accuracy": 0.8,
+  "control_recall": 0.0,
+  "experiment_recall": 0.8,
+  "guarded_recall": 0.8,
+  "control_avg_ms": 2519.4,
+  "experiment_avg_ms": 2579.4,
+  "guarded_avg_ms": 5098.8,
+  "rows": [
+    {
+      "query": "What is the current reorder point for SKU-A?",
+      "expected": [
+        "980",
+        "units"
+      ],
+      "control_answer": "I don’t have that value in the fresh post-reset context yet. Please provide it again.",
+      "experiment_answer": "The current reorder point for SKU-A is 980 units.",
+      "guarded_answer": "The current reorder point for SKU-A is 980 units.",
+      "control_hit": false,
+      "experiment_hit": true,
+      "guarded_hit": true,
+      "control_ms": 2917,
+      "experiment_ms": 3638,
+      "guarded_ms": 6555
+    },
+    {
+      "query": "What is current safety stock policy?",
+      "expected": [
+        "15 days",
+        "10 days"
+      ],
+      "control_answer": "I don’t have a safety stock policy in the fresh post-reset context yet. Please share it again, and I’ll track it from here.",
+      "experiment_answer": "The current safety stock policy is 15 days for SKU-A and 10 days for SKU-B.",
+      "guarded_answer": "The current safety stock policy is 15 days for SKU-A and 10 days for SKU-B.",
+      "control_hit": false,
+      "experiment_hit": true,
+      "guarded_hit": true,
+      "control_ms": 2396,
+      "experiment_ms": 1895,
+      "guarded_ms": 4291
+    },
+    {
+      "query": "When can we use expedite shipping?",
+      "expected": [
+        "stockout_risk > 0.7"
+      ],
+      "control_answer": "I don’t have an expedite-shipping rule in the fresh post-reset context yet. Please provide it, and I’ll apply it exactly.",
+      "experiment_answer": "You can use expedite shipping only when stockout_risk is greater than 0.7.",
+      "guarded_answer": "I don’t have an expedite-shipping rule in the fresh post-reset context yet. Please provide it, and I’ll apply it exactly.",
+      "control_hit": false,
+      "experiment_hit": false,
+      "guarded_hit": false,
+      "control_ms": 2105,
+      "experiment_ms": 2191,
+      "guarded_ms": 4296
+    },
+    {
+      "query": "What is max backorder window?",
+      "expected": [
+        "9 days"
+      ],
+      "control_answer": "I don’t have a max backorder window in the fresh post-reset context yet. Please provide it again.",
+      "experiment_answer": "The max backorder window is 9 days.",
+      "guarded_answer": "The max backorder window is 9 days.",
+      "control_hit": false,
+      "experiment_hit": true,
+      "guarded_hit": true,
+      "control_ms": 2291,
+      "experiment_ms": 3378,
+      "guarded_ms": 5669
+    },
+    {
+      "query": "Who are primary and backup vendors?",
+      "expected": [
+        "VENDOR-DELTA",
+        "VENDOR-OMEGA"
+      ],
+      "control_answer": "I don’t have vendor assignments in the fresh post-reset context yet. Please share primary and backup vendors again.",
+      "experiment_answer": "The primary vendor is VENDOR-DELTA and the backup vendor is VENDOR-OMEGA.",
+      "guarded_answer": "The primary vendor is VENDOR-DELTA and the backup vendor is VENDOR-OMEGA.",
+      "control_hit": false,
+      "experiment_hit": true,
+      "guarded_hit": true,
+      "control_ms": 2888,
+      "experiment_ms": 1795,
+      "guarded_ms": 4683
+    }
+  ],
+  "generated_at": 1772363719
+}
