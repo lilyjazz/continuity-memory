@@ -1,0 +1,65 @@
+{
+  "mode": "openclaw-remote-real-compact-mvp-style",
+  "host": "ec2-18-140-98-28.ap-southeast-1.compute.amazonaws.com",
+  "cases": 1,
+  "total_queries": 3,
+  "control_recall": 1.0,
+  "experiment_recall": 0.6666666666666666,
+  "delta": -0.3333333333333333,
+  "elapsed_sec": 294.54,
+  "case_reports": [
+    {
+      "case_id": "medtech_01",
+      "domain": "medical-device-regulatory",
+      "conversation_id": "remote-mvp-medtech_01-3753c4",
+      "control_session_id": "ab-control-medtech_01-903deffe",
+      "experiment_session_id": "ab-exp-medtech_01-88a6e75b",
+      "pre_compaction_anchor_version": 1,
+      "compact_control_reply": "Compact summary:\n\n- Class II medical device submission in progress.\n- Device: wearable ECG patch for arrhythmia monitoring.\n- Regulatory path: FDA 510(k), predicate K123456.\n- Primary endpoint: AFib detection sensitivity ≥ 92%.\n- Secondary endpoint: false alarm rate < 0.15/hour.\n- Pilot study: 120 patients, 3 sites.\n- Risk control: ISO 10993 skin irritation biocompatibility test.\n- Data policy: retain raw ECG for 24 months.\n- Security requirement: AES-256 encryption at rest.\n- Timeline: verification complete by Q3; submission in Q4.\n- Decision: no cloud PHI export before legal sign-off.\n- Open issue: finalize adverse event adjudication workflow.",
+      "compact_experiment_reply": "Acknowledged — I’ll keep replies compact.",
+      "rows": [
+        {
+          "query": "What regulatory path did we choose?",
+          "expected": [
+            "510(k)",
+            "K123456"
+          ],
+          "control_answer": "You chose the **FDA 510(k)** regulatory pathway (with predicate **K123456**).",
+          "experiment_answer": "FDA **510(k)**.",
+          "control_hit": true,
+          "experiment_hit": false,
+          "anchor_version_used": 1,
+          "anchor_version_after_ack": 2
+        },
+        {
+          "query": "What is our primary endpoint target?",
+          "expected": [
+            "sensitivity",
+            "92%"
+          ],
+          "control_answer": "**AFib detection sensitivity ≥ 92%**.",
+          "experiment_answer": "AFib detection sensitivity **≥ 92%**.",
+          "control_hit": true,
+          "experiment_hit": true,
+          "anchor_version_used": 2,
+          "anchor_version_after_ack": 3
+        },
+        {
+          "query": "Any hard constraint on PHI export?",
+          "expected": [
+            "no cloud PHI export",
+            "legal sign-off"
+          ],
+          "control_answer": "Yes — **no cloud PHI export before legal sign-off**.",
+          "experiment_answer": "Yes — **no cloud PHI export before legal sign-off**.",
+          "control_hit": true,
+          "experiment_hit": true,
+          "anchor_version_used": 3,
+          "anchor_version_after_ack": 4
+        }
+      ]
+    }
+  ],
+  "disclosure": "MVP-like A/B flow with real /compact on remote OpenClaw and continuity context injection from P0 service.",
+  "generated_at": 1772437816
+}

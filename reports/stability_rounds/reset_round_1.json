@@ -1,0 +1,172 @@
+{
+  "mode": "openclaw-remote-real-reset-behavioral-day-switch",
+  "host": "ec2-18-140-98-28.ap-southeast-1.compute.amazonaws.com",
+  "cases": 1,
+  "total_queries": 3,
+  "control_recall": 0.0,
+  "experiment_recall": 0.6666666666666666,
+  "delta": 0.6666666666666666,
+  "control_recall_strict": 0.0,
+  "experiment_recall_strict": 0.6666666666666666,
+  "delta_strict": 0.6666666666666666,
+  "control_recall_semantic": 0.0,
+  "experiment_recall_semantic": 1.0,
+  "delta_semantic": 1.0,
+  "elapsed_sec": 263.36,
+  "case_reports": [
+    {
+      "case_id": "releaseops_01",
+      "domain": "release-engineering",
+      "conversation_id": "behavior-reset-releaseops_01-ee08bf",
+      "control_day1_session_id": "ab-control-r-day1-releaseops_01-9d66e090",
+      "control_day2_session_id": "ab-control-r-day2-releaseops_01-3d1c6a12",
+      "experiment_day1_session_id": "ab-exp-r-day1-releaseops_01-44500730",
+      "experiment_day2_session_id": "ab-exp-r-day2-releaseops_01-50ab5a51",
+      "pre_reset_anchor_version": 1,
+      "reset_control_reply": "Reset acknowledged. I’ll treat subsequent messages as a fresh context.",
+      "reset_experiment_reply": "Reset acknowledged. Ready for new input.",
+      "rows": [
+        {
+          "query": "What rollout policy are we using now?",
+          "followup_query": "It is the next day and we resumed after reset. Continue based on prior known decisions.\nWe had a reset event yesterday and this is a fresh session today.\nQuestion: What rollout policy are we using now?\nAnswer in one short sentence.",
+          "expected": [
+            "canary 5%",
+            "then 25%"
+          ],
+          "control_answer": "Our current rollout policy is: no cloud PHI export before legal sign-off.",
+          "experiment_answer": "We’re using a canary rollout policy: start at 5%, then advance to 25% unless the freeze/rollback thresholds are hit.",
+          "control_hit": false,
+          "experiment_hit": false,
+          "control_hit_strict": false,
+          "experiment_hit_strict": false,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 0.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "canary 5%",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "then 25%",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "canary 5%",
+              "strict_hit": false,
+              "semantic_hit": true
+            },
+            {
+              "token": "then 25%",
+              "strict_hit": false,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 1,
+          "anchor_version_after_ack": 2
+        },
+        {
+          "query": "When do we freeze rollout progression?",
+          "followup_query": "It is the next day and we resumed after reset. Continue based on prior known decisions.\nWe had a reset event yesterday and this is a fresh session today.\nQuestion: When do we freeze rollout progression?\nAnswer in one short sentence.",
+          "expected": [
+            "P95 latency",
+            "12%"
+          ],
+          "control_answer": "We freeze rollout progression until legal sign-off is complete.",
+          "experiment_answer": "We freeze rollout progression when P95 latency regresses by more than 12% at the current stage.",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "P95 latency",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "12%",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "P95 latency",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "12%",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 2,
+          "anchor_version_after_ack": 3
+        },
+        {
+          "query": "What triggers immediate rollback?",
+          "followup_query": "It is the next day and we resumed after reset. Continue based on prior known decisions.\nWe had a reset event yesterday and this is a fresh session today.\nQuestion: What triggers immediate rollback?\nAnswer in one short sentence.",
+          "expected": [
+            "checkout error rate",
+            "1.8%"
+          ],
+          "control_answer": "I checked prior memory and there is no recorded immediate-rollback trigger yet.",
+          "experiment_answer": "Immediate rollback is triggered if checkout error rate exceeds 1.8% for 5 consecutive minutes.",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "checkout error rate",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "1.8%",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "checkout error rate",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "1.8%",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 3,
+          "anchor_version_after_ack": 4
+        }
+      ]
+    }
+  ],
+  "disclosure": "Behavioral simulation with real /reset and explicit next-day new session switch. Dual-track strict+semantic evaluation enabled.",
+  "generated_at": 1772502551
+}

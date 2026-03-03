@@ -1,0 +1,172 @@
+{
+  "mode": "openclaw-remote-real-compact-behavioral-day-switch",
+  "host": "ec2-18-140-98-28.ap-southeast-1.compute.amazonaws.com",
+  "cases": 1,
+  "total_queries": 3,
+  "control_recall": 0.0,
+  "experiment_recall": 0.6666666666666666,
+  "delta": 0.6666666666666666,
+  "control_recall_strict": 0.0,
+  "experiment_recall_strict": 0.6666666666666666,
+  "delta_strict": 0.6666666666666666,
+  "control_recall_semantic": 0.0,
+  "experiment_recall_semantic": 1.0,
+  "delta_semantic": 1.0,
+  "elapsed_sec": 296.44,
+  "case_reports": [
+    {
+      "case_id": "releaseops_01",
+      "domain": "release-engineering",
+      "conversation_id": "behavior-releaseops_01-6532ee",
+      "control_day1_session_id": "ab-control-day1-releaseops_01-3d8b6f18",
+      "control_day2_session_id": "ab-control-day2-releaseops_01-fb85a946",
+      "experiment_day1_session_id": "ab-exp-day1-releaseops_01-b18c7d2d",
+      "experiment_day2_session_id": "ab-exp-day2-releaseops_01-6d14024a",
+      "pre_compaction_anchor_version": 1,
+      "compact_control_reply": "Compact mode on.",
+      "compact_experiment_reply": "✅ Compact mode on.",
+      "rows": [
+        {
+          "query": "What rollout policy are we using now?",
+          "followup_query": "It is the next day and we are continuing yesterday's project context.\nYesterday context should still apply.\nQuestion: What rollout policy are we using now?\nAnswer in one short sentence.",
+          "expected": [
+            "canary 5%",
+            "then 25%"
+          ],
+          "control_answer": "The rollout policy remains: **no cloud PHI export until legal sign-off is complete**.",
+          "experiment_answer": "We’re using a canary rollout policy of **5% first, then 25%** if guardrails hold.",
+          "control_hit": false,
+          "experiment_hit": false,
+          "control_hit_strict": false,
+          "experiment_hit_strict": false,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 0.5,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "canary 5%",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "then 25%",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "canary 5%",
+              "strict_hit": false,
+              "semantic_hit": true
+            },
+            {
+              "token": "then 25%",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 1,
+          "anchor_version_after_ack": 2
+        },
+        {
+          "query": "When do we freeze rollout progression?",
+          "followup_query": "It is the next day and we are continuing yesterday's project context.\nYesterday context should still apply.\nQuestion: When do we freeze rollout progression?\nAnswer in one short sentence.",
+          "expected": [
+            "P95 latency",
+            "12%"
+          ],
+          "control_answer": "We freeze rollout progression whenever a step would involve cloud PHI export before legal sign-off.",
+          "experiment_answer": "We freeze rollout progression if **P95 latency regresses by more than 12%** at the current stage.",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "P95 latency",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "12%",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "P95 latency",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "12%",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 2,
+          "anchor_version_after_ack": 3
+        },
+        {
+          "query": "What triggers immediate rollback?",
+          "followup_query": "It is the next day and we are continuing yesterday's project context.\nYesterday context should still apply.\nQuestion: What triggers immediate rollback?\nAnswer in one short sentence.",
+          "expected": [
+            "checkout error rate",
+            "1.8%"
+          ],
+          "control_answer": "Immediate rollback is triggered by any cloud PHI export occurring before legal sign-off.",
+          "experiment_answer": "Immediate rollback is triggered when **checkout error rate exceeds 1.8% for 5 minutes**.",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "checkout error rate",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "1.8%",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "checkout error rate",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "1.8%",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 3,
+          "anchor_version_after_ack": 4
+        }
+      ]
+    }
+  ],
+  "disclosure": "Behavioral simulation with real /compact and explicit next-day session switch. Dual-track strict+semantic evaluation enabled.",
+  "generated_at": 1772502848
+}
