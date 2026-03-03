@@ -1,0 +1,465 @@
+{
+  "mode": "openclaw-remote-real-reset-behavioral-day-switch",
+  "host": "ec2-18-140-98-28.ap-southeast-1.compute.amazonaws.com",
+  "cases": 3,
+  "total_queries": 9,
+  "control_recall": 0.1111111111111111,
+  "experiment_recall": 0.7777777777777778,
+  "delta": 0.6666666666666666,
+  "control_recall_strict": 0.1111111111111111,
+  "experiment_recall_strict": 0.7777777777777778,
+  "delta_strict": 0.6666666666666666,
+  "control_recall_semantic": 0.1111111111111111,
+  "experiment_recall_semantic": 1.0,
+  "delta_semantic": 0.8888888888888888,
+  "elapsed_sec": 1367.34,
+  "case_reports": [
+    {
+      "case_id": "medtech_01",
+      "domain": "medical-device-regulatory",
+      "conversation_id": "default:behavior-reset-medtech_01-54e0ed",
+      "control_day1_session_id": "ab-control-r-day1-medtech_01-131882e8",
+      "control_day2_session_id": "ab-control-r-day2-medtech_01-0a8b492b",
+      "experiment_day1_session_id": "ab-exp-r-day1-medtech_01-408ef393",
+      "experiment_day2_session_id": "ab-exp-r-day2-medtech_01-c4b2096f",
+      "pre_reset_anchor_version": 1,
+      "reset_control_reply": "Reset acknowledged. I’ll treat this as a fresh context from here.",
+      "reset_experiment_reply": "Reset acknowledged.  \nI’ll only use information you provide after this point.",
+      "rows": [
+        {
+          "query": "What regulatory path did we choose?",
+          "followup_query": "It is the next day and we resumed after reset. Continue based on prior known decisions.\nWe had a reset event yesterday and this is a fresh session today.\nQuestion: What regulatory path did we choose?\nAnswer in one short sentence.",
+          "expected": [
+            "510(k)",
+            "K123456"
+          ],
+          "control_answer": "We chose a compliance-first path: no cloud PHI export until legal signs off.",
+          "experiment_answer": "We chose the 510(k) pathway (anchor: K123456).",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "510(k)",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "K123456",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "510(k)",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "K123456",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 1,
+          "anchor_version_after_ack": 2
+        },
+        {
+          "query": "What is our primary endpoint target?",
+          "followup_query": "It is the next day and we resumed after reset. Continue based on prior known decisions.\nWe had a reset event yesterday and this is a fresh session today.\nQuestion: What is our primary endpoint target?\nAnswer in one short sentence.",
+          "expected": [
+            "sensitivity",
+            "92%"
+          ],
+          "control_answer": "I checked our memory and we don’t have a recorded primary endpoint target yet.",
+          "experiment_answer": "Our primary endpoint target is sensitivity at 92%.",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "sensitivity",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "92%",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "sensitivity",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "92%",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 2,
+          "anchor_version_after_ack": 3
+        },
+        {
+          "query": "Any hard constraint on PHI export?",
+          "followup_query": "It is the next day and we resumed after reset. Continue based on prior known decisions.\nWe had a reset event yesterday and this is a fresh session today.\nQuestion: Any hard constraint on PHI export?\nAnswer in one short sentence.",
+          "expected": [
+            "no cloud PHI export",
+            "legal sign-off"
+          ],
+          "control_answer": "Yes—there is a hard constraint: no cloud PHI export before legal sign-off.",
+          "experiment_answer": "Yes—there is a hard constraint: no cloud PHI export before legal sign-off.",
+          "control_hit": true,
+          "experiment_hit": true,
+          "control_hit_strict": true,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": true,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 1.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 1.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "no cloud PHI export",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "legal sign-off",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "no cloud PHI export",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "legal sign-off",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 3,
+          "anchor_version_after_ack": 4
+        }
+      ]
+    },
+    {
+      "case_id": "finops_01",
+      "domain": "payment-risk-ops",
+      "conversation_id": "default:behavior-reset-finops_01-d85bfe",
+      "control_day1_session_id": "ab-control-r-day1-finops_01-7dedea6e",
+      "control_day2_session_id": "ab-control-r-day2-finops_01-642a306c",
+      "experiment_day1_session_id": "ab-exp-r-day1-finops_01-6b6ee0d3",
+      "experiment_day2_session_id": "ab-exp-r-day2-finops_01-04fb0406",
+      "pre_reset_anchor_version": 1,
+      "reset_control_reply": "Reset acknowledged.\nI’ll treat this as a fresh start from here—share what you want to work on next.",
+      "reset_experiment_reply": "Reset acknowledged. Starting fresh—what do you want to work on now?",
+      "rows": [
+        {
+          "query": "What threshold did we set for chargeback warning?",
+          "followup_query": "It is the next day and we resumed after reset. Continue based on prior known decisions.\nWe had a reset event yesterday and this is a fresh session today.\nQuestion: What threshold did we set for chargeback warning?\nAnswer in one short sentence.",
+          "expected": [
+            "1.2%",
+            "weekly"
+          ],
+          "control_answer": "I checked our memory and there’s no recorded chargeback warning threshold from prior decisions.",
+          "experiment_answer": "I checked, and the chargeback warning threshold was set at **1.2% weekly**.",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "1.2%",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "weekly",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "1.2%",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "weekly",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 1,
+          "anchor_version_after_ack": 2
+        },
+        {
+          "query": "When do we block payouts?",
+          "followup_query": "It is the next day and we resumed after reset. Continue based on prior known decisions.\nWe had a reset event yesterday and this is a fresh session today.\nQuestion: When do we block payouts?\nAnswer in one short sentence.",
+          "expected": [
+            "sanctions screen",
+            "unresolved"
+          ],
+          "control_answer": "I checked our memory and there’s no recorded prior decision on when to block payouts.",
+          "experiment_answer": "We block payouts whenever the sanctions screen is unresolved.",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "sanctions screen",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "unresolved",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "sanctions screen",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "unresolved",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 2,
+          "anchor_version_after_ack": 3
+        },
+        {
+          "query": "Any rule about instant payout eligibility?",
+          "followup_query": "It is the next day and we resumed after reset. Continue based on prior known decisions.\nWe had a reset event yesterday and this is a fresh session today.\nQuestion: Any rule about instant payout eligibility?\nAnswer in one short sentence.",
+          "expected": [
+            "no instant payout",
+            "< 60 days"
+          ],
+          "control_answer": "I checked our memory and there’s no recorded rule about instant payout eligibility.",
+          "experiment_answer": "Yes—accounts under 60 days old are not eligible for instant payout.",
+          "control_hit": false,
+          "experiment_hit": false,
+          "control_hit_strict": false,
+          "experiment_hit_strict": false,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 0.0,
+          "control_coverage_semantic": 0.5,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "no instant payout",
+              "strict_hit": false,
+              "semantic_hit": true
+            },
+            {
+              "token": "< 60 days",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "no instant payout",
+              "strict_hit": false,
+              "semantic_hit": true
+            },
+            {
+              "token": "< 60 days",
+              "strict_hit": false,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 3,
+          "anchor_version_after_ack": 4
+        }
+      ]
+    },
+    {
+      "case_id": "mlops_01",
+      "domain": "llm-platform-ops",
+      "conversation_id": "default:behavior-reset-mlops_01-337d04",
+      "control_day1_session_id": "ab-control-r-day1-mlops_01-15dd6bb5",
+      "control_day2_session_id": "ab-control-r-day2-mlops_01-2509075e",
+      "experiment_day1_session_id": "ab-exp-r-day1-mlops_01-58e59e74",
+      "experiment_day2_session_id": "ab-exp-r-day2-mlops_01-7805a623",
+      "pre_reset_anchor_version": 1,
+      "reset_control_reply": "Reset acknowledged. I’ll treat subsequent messages as a fresh context.",
+      "reset_experiment_reply": "Reset acknowledged. I’ll treat this as a fresh context from here.",
+      "rows": [
+        {
+          "query": "What is our hard timeout policy?",
+          "followup_query": "It is the next day and we resumed after reset. Continue based on prior known decisions.\nWe had a reset event yesterday and this is a fresh session today.\nQuestion: What is our hard timeout policy?\nAnswer in one short sentence.",
+          "expected": [
+            "20 seconds",
+            "graceful degrade"
+          ],
+          "control_answer": "I checked our saved memory and there is no documented hard timeout policy yet.",
+          "experiment_answer": "Our hard timeout policy is 20 seconds, after which we return a graceful-degrade response.",
+          "control_hit": false,
+          "experiment_hit": false,
+          "control_hit_strict": false,
+          "experiment_hit_strict": false,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 0.5,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "20 seconds",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "graceful degrade",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "20 seconds",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "graceful degrade",
+              "strict_hit": false,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 1,
+          "anchor_version_after_ack": 2
+        },
+        {
+          "query": "What rollback trigger did we define?",
+          "followup_query": "It is the next day and we resumed after reset. Continue based on prior known decisions.\nWe had a reset event yesterday and this is a fresh session today.\nQuestion: What rollback trigger did we define?\nAnswer in one short sentence.",
+          "expected": [
+            "error rate",
+            "2.5%"
+          ],
+          "control_answer": "I checked our saved memory and no rollback trigger has been documented yet.",
+          "experiment_answer": "We defined rollback to trigger when the error rate reaches 2.5%.",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "error rate",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "2.5%",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "error rate",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "2.5%",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 2,
+          "anchor_version_after_ack": 3
+        },
+        {
+          "query": "How long do we retain debug traces in base tier?",
+          "followup_query": "It is the next day and we resumed after reset. Continue based on prior known decisions.\nWe had a reset event yesterday and this is a fresh session today.\nQuestion: How long do we retain debug traces in base tier?\nAnswer in one short sentence.",
+          "expected": [
+            "14 days"
+          ],
+          "control_answer": "I checked our saved memory and there is no documented base-tier debug-trace retention period yet.",
+          "experiment_answer": "We retain debug traces in the base tier for 14 days.",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "14 days",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "14 days",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 3,
+          "anchor_version_after_ack": 4
+        }
+      ]
+    }
+  ],
+  "disclosure": "Behavioral simulation with real /reset and explicit next-day new session switch. Dual-track strict+semantic evaluation enabled.",
+  "generated_at": 1772510437
+}

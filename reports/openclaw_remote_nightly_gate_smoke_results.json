@@ -1,0 +1,78 @@
+{
+  "mode": "openclaw-remote-nightly-gate",
+  "host": "ec2-18-140-98-28.ap-southeast-1.compute.amazonaws.com",
+  "data": "mvp/data/ab_cases_quality.jsonl",
+  "quality_max_cases": 1,
+  "stability_max_cases": 1,
+  "stability_rounds": 1,
+  "compact": {
+    "cases": 1,
+    "total_queries": 3,
+    "control_recall": 0.0,
+    "experiment_recall": 0.3333333333333333,
+    "delta": 0.3333333333333333,
+    "control_recall_semantic": 0.0,
+    "experiment_recall_semantic": 0.3333333333333333,
+    "delta_semantic": 0.3333333333333333,
+    "elapsed_sec": 223.37,
+    "out": "/Users/lux/repo/continuity-memory/reports/openclaw_remote_behavioral_quality_compact_ab_results.json"
+  },
+  "reset": {
+    "cases": 1,
+    "total_queries": 3,
+    "control_recall": 0.0,
+    "experiment_recall": 0.6666666666666666,
+    "delta": 0.6666666666666666,
+    "control_recall_semantic": 0.0,
+    "experiment_recall_semantic": 1.0,
+    "delta_semantic": 1.0,
+    "elapsed_sec": 252.31,
+    "out": "/Users/lux/repo/continuity-memory/reports/openclaw_remote_behavioral_quality_reset_ab_results.json"
+  },
+  "stability": {
+    "round_count": 1,
+    "passed_rounds": 1,
+    "compact_delta_avg": 0.6666666666666666,
+    "reset_delta_avg": 0.6666666666666666,
+    "elapsed_avg_sec": 532.78,
+    "elapsed_p95_sec": 532.78,
+    "out": "/Users/lux/repo/continuity-memory/reports/openclaw_remote_stability_loop_results.json"
+  },
+  "gate": {
+    "overall_pass": true,
+    "checks": {
+      "compact_delta_strict": {
+        "ok": true,
+        "actual": 0.3333333333333333,
+        "min": 0.2
+      },
+      "reset_delta_strict": {
+        "ok": true,
+        "actual": 0.6666666666666666,
+        "min": 0.2
+      },
+      "compact_delta_semantic": {
+        "ok": true,
+        "actual": 0.3333333333333333,
+        "min": 0.3
+      },
+      "reset_delta_semantic": {
+        "ok": true,
+        "actual": 1.0,
+        "min": 0.3
+      },
+      "stability_pass_rate": {
+        "ok": true,
+        "actual": 1.0,
+        "min": 1.0
+      },
+      "stability_elapsed_p95": {
+        "ok": true,
+        "actual": 532.78,
+        "max": 1200.0
+      }
+    }
+  },
+  "elapsed_sec": 1008.81,
+  "generated_at": 1772501991
+}

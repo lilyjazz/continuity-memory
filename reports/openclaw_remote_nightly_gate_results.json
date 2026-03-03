@@ -1,0 +1,78 @@
+{
+  "mode": "openclaw-remote-nightly-gate",
+  "host": "ec2-18-140-98-28.ap-southeast-1.compute.amazonaws.com",
+  "data": "mvp/data/ab_cases_quality.jsonl",
+  "quality_max_cases": 6,
+  "stability_max_cases": 1,
+  "stability_rounds": 5,
+  "compact": {
+    "cases": 6,
+    "total_queries": 18,
+    "control_recall": 0.0,
+    "experiment_recall": 0.7222222222222222,
+    "delta": 0.7222222222222222,
+    "control_recall_semantic": 0.0,
+    "experiment_recall_semantic": 0.8333333333333334,
+    "delta_semantic": 0.8333333333333334,
+    "elapsed_sec": 1586.27,
+    "out": "/Users/lux/repo/continuity-memory/reports/openclaw_remote_behavioral_quality_compact_ab_results.json"
+  },
+  "reset": {
+    "cases": 6,
+    "total_queries": 18,
+    "control_recall": 0.0,
+    "experiment_recall": 0.6666666666666666,
+    "delta": 0.6666666666666666,
+    "control_recall_semantic": 0.0,
+    "experiment_recall_semantic": 0.7777777777777778,
+    "delta_semantic": 0.7777777777777778,
+    "elapsed_sec": 1529.24,
+    "out": "/Users/lux/repo/continuity-memory/reports/openclaw_remote_behavioral_quality_reset_ab_results.json"
+  },
+  "stability": {
+    "round_count": 5,
+    "passed_rounds": 5,
+    "compact_delta_avg": 0.6666666666666666,
+    "reset_delta_avg": 0.6666666666666666,
+    "elapsed_avg_sec": 511.434,
+    "elapsed_p95_sec": 525.85,
+    "out": "/Users/lux/repo/continuity-memory/reports/openclaw_remote_stability_loop_results.json"
+  },
+  "gate": {
+    "overall_pass": false,
+    "checks": {
+      "compact_delta_strict": {
+        "ok": true,
+        "actual": 0.7222222222222222,
+        "min": 0.2
+      },
+      "reset_delta_strict": {
+        "ok": true,
+        "actual": 0.6666666666666666,
+        "min": 0.2
+      },
+      "compact_delta_semantic": {
+        "ok": true,
+        "actual": 0.8333333333333334,
+        "min": 0.3
+      },
+      "reset_delta_semantic": {
+        "ok": true,
+        "actual": 0.7777777777777778,
+        "min": 0.3
+      },
+      "stability_pass_rate": {
+        "ok": false,
+        "actual": 0.0,
+        "min": 1.0
+      },
+      "stability_elapsed_p95": {
+        "ok": true,
+        "actual": 0.0,
+        "max": 1200.0
+      }
+    }
+  },
+  "elapsed_sec": 5673.04,
+  "generated_at": 1772500918
+}

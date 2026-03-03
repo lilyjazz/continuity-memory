@@ -1,0 +1,166 @@
+{
+  "mode": "openclaw-remote-real-compact-mvp-style",
+  "host": "ec2-18-140-98-28.ap-southeast-1.compute.amazonaws.com",
+  "cases": 3,
+  "total_queries": 9,
+  "control_recall": 0.7777777777777778,
+  "experiment_recall": 0.6666666666666666,
+  "delta": -0.1111111111111111,
+  "elapsed_sec": 731.66,
+  "case_reports": [
+    {
+      "case_id": "medtech_01",
+      "domain": "medical-device-regulatory",
+      "conversation_id": "remote-mvp-medtech_01-d9524a",
+      "control_session_id": "ab-control-medtech_01-f5c0dbe6",
+      "experiment_session_id": "ab-exp-medtech_01-90d785f0",
+      "pre_compaction_anchor_version": 1,
+      "compact_control_reply": "✅ Compact mode on.",
+      "compact_experiment_reply": "Acknowledged. Compact mode on.",
+      "rows": [
+        {
+          "query": "What regulatory path did we choose?",
+          "expected": [
+            "510(k)",
+            "K123456"
+          ],
+          "control_answer": "FDA 510(k), using predicate device **K123456**.",
+          "experiment_answer": "FDA **510(k)** (using predicate device **K123456**).",
+          "control_hit": true,
+          "experiment_hit": true,
+          "anchor_version_used": 1,
+          "anchor_version_after_ack": 2
+        },
+        {
+          "query": "What is our primary endpoint target?",
+          "expected": [
+            "sensitivity",
+            "92%"
+          ],
+          "control_answer": "AFib detection sensitivity **≥ 92%**.",
+          "experiment_answer": "**AFib detection sensitivity ≥ 92%**.",
+          "control_hit": true,
+          "experiment_hit": true,
+          "anchor_version_used": 2,
+          "anchor_version_after_ack": 3
+        },
+        {
+          "query": "Any hard constraint on PHI export?",
+          "expected": [
+            "no cloud PHI export",
+            "legal sign-off"
+          ],
+          "control_answer": "Yes — **no cloud PHI export before legal sign-off**.",
+          "experiment_answer": "Yes — **no cloud PHI export before legal sign-off**.",
+          "control_hit": true,
+          "experiment_hit": true,
+          "anchor_version_used": 3,
+          "anchor_version_after_ack": 4
+        }
+      ]
+    },
+    {
+      "case_id": "finops_01",
+      "domain": "payment-risk-ops",
+      "conversation_id": "remote-mvp-finops_01-3ceda1",
+      "control_session_id": "ab-control-finops_01-eeb2f3ab",
+      "experiment_session_id": "ab-exp-finops_01-b08ba0df",
+      "pre_compaction_anchor_version": 1,
+      "compact_control_reply": "Understood — compact mode on.\n\n**Current snapshot**\n- Focus: redesign payout risk controls for cross-border merchants.\n- Settlement priority: USD, then EUR.\n- Chargeback early warning: 1.2% weekly.\n- Reserve policy (high-risk): 8% rolling reserve for 90 days.\n- Fraud model refresh: every 14 days.\n- Manual review SLA: under 6 hours.\n- Critical control: block payouts if sanctions screening is unresolved.\n- KYC vendor: keep current vendor until Q2 migration.\n- Instant payout rule: not allowed for merchant tenure < 60 days.\n- Incident response: #risk-war-room + pager escalation.\n- Monthly audit sample: 300 accounts.\n- Open issue: define exception approval matrix for strategic accounts.",
+      "compact_experiment_reply": "- Scope: redesign payout risk controls for cross-border merchants.  \n- Settlement priority: USD, then EUR.  \n- Early warning: chargeback threshold 1.2% weekly.  \n- Reserve: high-risk merchants hold 8% rolling reserve for 90 days.  \n- Fraud model refresh: every 14 days.  \n- Ops SLA: manual review < 6 hours.  \n- Hard block: no payouts if sanctions screening is unresolved.  \n- KYC vendor: keep current vendor until Q2 migration.  \n- Instant payout: disabled for merchant tenure < 60 days.  \n- Incident response: `#risk-war-room` + pager escalation.  \n- Audit: monthly sample size = 300 accounts.  \n- Open issue: define exception approval matrix for strategic accounts.",
+      "rows": [
+        {
+          "query": "What threshold did we set for chargeback warning?",
+          "expected": [
+            "1.2%",
+            "weekly"
+          ],
+          "control_answer": "1.2% weekly.",
+          "experiment_answer": "Chargeback early-warning threshold is **1.2% weekly**.",
+          "control_hit": true,
+          "experiment_hit": true,
+          "anchor_version_used": 1,
+          "anchor_version_after_ack": 2
+        },
+        {
+          "query": "When do we block payouts?",
+          "expected": [
+            "sanctions screen",
+            "unresolved"
+          ],
+          "control_answer": "When sanctions screening is unresolved.",
+          "experiment_answer": "We block payouts **when sanctions screening is unresolved**.",
+          "control_hit": true,
+          "experiment_hit": true,
+          "anchor_version_used": 2,
+          "anchor_version_after_ack": 3
+        },
+        {
+          "query": "Any rule about instant payout eligibility?",
+          "expected": [
+            "no instant payout",
+            "< 60 days"
+          ],
+          "control_answer": "Yes — instant payout is blocked for merchants with tenure under 60 days.",
+          "experiment_answer": "Yes — **no instant payout for merchants with tenure under 60 days**.",
+          "control_hit": false,
+          "experiment_hit": false,
+          "anchor_version_used": 3,
+          "anchor_version_after_ack": 4
+        }
+      ]
+    },
+    {
+      "case_id": "mlops_01",
+      "domain": "llm-platform-ops",
+      "conversation_id": "remote-mvp-mlops_01-fa2f4b",
+      "control_session_id": "ab-control-mlops_01-47fe4700",
+      "experiment_session_id": "ab-exp-mlops_01-4c5f5b00",
+      "pre_compaction_anchor_version": 1,
+      "compact_control_reply": "Compact state saved (session-only facts):\n\n- You operate an internal LLM gateway for enterprise teams.\n- Default coding route: **gpt-5.3-codex**.\n- Fallback on latency spikes: **gpt-4.1-mini**.\n- Chat endpoint latency target: **P95 < 4.5s**.\n- Hard timeout: **20s** with graceful degrade response.\n- **Context compaction enabled** for long threads.\n- **Memory flush precedes auto-compaction** when possible.\n- Base-tier debug trace retention: **14 days**.\n- **PII must be masked** in traces before persistence.\n- Deployment policy: **10% canary required** before full production changes.\n- Rollback trigger: **error-rate increase > 2.5%**.\n- Open issue: **improve post-compaction continuity for follow-up questions**.",
+      "compact_experiment_reply": "Compact state captured. Current facts in this session:\n\n- You operate an internal LLM gateway for enterprise teams.\n- Default coding route: **gpt-5.3-codex**.\n- Fallback route on latency spikes: **gpt-4.1-mini**.\n- Chat endpoint latency target: **P95 < 4.5s**.\n- Hard timeout: **20s** with graceful degrade response.\n- Context compaction is enabled for long threads.\n- Memory flush runs before auto-compaction when possible.\n- Debug trace retention (base tier): **14 days**.\n- PII in traces must be masked before persistence.\n- Production changes require **10% canary** first.\n- Rollback trigger: **error rate increase > 2.5%**.\n- Open issue: improve post-compaction continuity for follow-up questions.",
+      "rows": [
+        {
+          "query": "What is our hard timeout policy?",
+          "expected": [
+            "20 seconds",
+            "graceful degrade"
+          ],
+          "control_answer": "Your hard-timeout policy is **20 seconds**, with a **graceful degrade response** when that limit is hit.",
+          "experiment_answer": "Your hard-timeout policy is: **20 seconds**, and when that limit is hit, the system should return a **graceful-degrade response**.",
+          "control_hit": true,
+          "experiment_hit": false,
+          "anchor_version_used": 1,
+          "anchor_version_after_ack": 2
+        },
+        {
+          "query": "What rollback trigger did we define?",
+          "expected": [
+            "error rate",
+            "2.5%"
+          ],
+          "control_answer": "You defined rollback to trigger on **error-rate increase above 2.5%**.",
+          "experiment_answer": "The rollback trigger you defined is: **an error-rate increase above 2.5%**.",
+          "control_hit": false,
+          "experiment_hit": false,
+          "anchor_version_used": 2,
+          "anchor_version_after_ack": 3
+        },
+        {
+          "query": "How long do we retain debug traces in base tier?",
+          "expected": [
+            "14 days"
+          ],
+          "control_answer": "**14 days**.",
+          "experiment_answer": "In the base tier, debug traces are retained for **14 days**.",
+          "control_hit": true,
+          "experiment_hit": true,
+          "anchor_version_used": 3,
+          "anchor_version_after_ack": 4
+        }
+      ]
+    }
+  ],
+  "disclosure": "MVP-like A/B flow with real /compact on remote OpenClaw and continuity context injection from P0 service.",
+  "generated_at": 1772474781
+}

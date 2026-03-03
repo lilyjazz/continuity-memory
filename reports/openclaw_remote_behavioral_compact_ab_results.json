@@ -1,0 +1,465 @@
+{
+  "mode": "openclaw-remote-real-compact-behavioral-day-switch",
+  "host": "ec2-18-140-98-28.ap-southeast-1.compute.amazonaws.com",
+  "cases": 3,
+  "total_queries": 9,
+  "control_recall": 0.1111111111111111,
+  "experiment_recall": 0.7777777777777778,
+  "delta": 0.6666666666666666,
+  "control_recall_strict": 0.1111111111111111,
+  "experiment_recall_strict": 0.7777777777777778,
+  "delta_strict": 0.6666666666666666,
+  "control_recall_semantic": 0.1111111111111111,
+  "experiment_recall_semantic": 1.0,
+  "delta_semantic": 0.8888888888888888,
+  "elapsed_sec": 1165.03,
+  "case_reports": [
+    {
+      "case_id": "medtech_01",
+      "domain": "medical-device-regulatory",
+      "conversation_id": "default:behavior-medtech_01-114182",
+      "control_day1_session_id": "ab-control-day1-medtech_01-e07e2ac3",
+      "control_day2_session_id": "ab-control-day2-medtech_01-6d60f53f",
+      "experiment_day1_session_id": "ab-exp-day1-medtech_01-edb06314",
+      "experiment_day2_session_id": "ab-exp-day2-medtech_01-351d973d",
+      "pre_compaction_anchor_version": 1,
+      "compact_control_reply": "Acknowledged. I’ll keep replies compact.",
+      "compact_experiment_reply": "✅ Compact mode on.",
+      "rows": [
+        {
+          "query": "What regulatory path did we choose?",
+          "followup_query": "It is the next day and we are continuing yesterday's project context.\nYesterday context should still apply.\nQuestion: What regulatory path did we choose?\nAnswer in one short sentence.",
+          "expected": [
+            "510(k)",
+            "K123456"
+          ],
+          "control_answer": "We chose the path of **not exporting PHI to the cloud until legal sign-off is complete**.",
+          "experiment_answer": "We chose the **510(k)** regulatory path (anchor: **K123456**).",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "510(k)",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "K123456",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "510(k)",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "K123456",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 1,
+          "anchor_version_after_ack": 2
+        },
+        {
+          "query": "What is our primary endpoint target?",
+          "followup_query": "It is the next day and we are continuing yesterday's project context.\nYesterday context should still apply.\nQuestion: What is our primary endpoint target?\nAnswer in one short sentence.",
+          "expected": [
+            "sensitivity",
+            "92%"
+          ],
+          "control_answer": "I checked and don’t have any recorded primary endpoint target in memory yet.",
+          "experiment_answer": "Our primary endpoint target is **92% sensitivity**.",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "sensitivity",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "92%",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "sensitivity",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "92%",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 2,
+          "anchor_version_after_ack": 3
+        },
+        {
+          "query": "Any hard constraint on PHI export?",
+          "followup_query": "It is the next day and we are continuing yesterday's project context.\nYesterday context should still apply.\nQuestion: Any hard constraint on PHI export?\nAnswer in one short sentence.",
+          "expected": [
+            "no cloud PHI export",
+            "legal sign-off"
+          ],
+          "control_answer": "Yes—there is a hard constraint: no cloud PHI export before legal sign-off.",
+          "experiment_answer": "Yes—there is a hard constraint: **no cloud PHI export before legal sign-off**.",
+          "control_hit": true,
+          "experiment_hit": true,
+          "control_hit_strict": true,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": true,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 1.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 1.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "no cloud PHI export",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "legal sign-off",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "no cloud PHI export",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "legal sign-off",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 3,
+          "anchor_version_after_ack": 4
+        }
+      ]
+    },
+    {
+      "case_id": "finops_01",
+      "domain": "payment-risk-ops",
+      "conversation_id": "default:behavior-finops_01-1f6bca",
+      "control_day1_session_id": "ab-control-day1-finops_01-895e132f",
+      "control_day2_session_id": "ab-control-day2-finops_01-cf137a1f",
+      "experiment_day1_session_id": "ab-exp-day1-finops_01-1643d063",
+      "experiment_day2_session_id": "ab-exp-day2-finops_01-dfe245cb",
+      "pre_compaction_anchor_version": 1,
+      "compact_control_reply": "Switched to compact mode.",
+      "compact_experiment_reply": "Acknowledged — I’ll keep replies compact.",
+      "rows": [
+        {
+          "query": "What threshold did we set for chargeback warning?",
+          "followup_query": "It is the next day and we are continuing yesterday's project context.\nYesterday context should still apply.\nQuestion: What threshold did we set for chargeback warning?\nAnswer in one short sentence.",
+          "expected": [
+            "1.2%",
+            "weekly"
+          ],
+          "control_answer": "I couldn’t find any recorded chargeback warning threshold in the saved project memory from yesterday.",
+          "experiment_answer": "We set the chargeback warning threshold at **1.2% on a weekly basis**.",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "1.2%",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "weekly",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "1.2%",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "weekly",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 1,
+          "anchor_version_after_ack": 2
+        },
+        {
+          "query": "When do we block payouts?",
+          "followup_query": "It is the next day and we are continuing yesterday's project context.\nYesterday context should still apply.\nQuestion: When do we block payouts?\nAnswer in one short sentence.",
+          "expected": [
+            "sanctions screen",
+            "unresolved"
+          ],
+          "control_answer": "I can’t find any saved rule from yesterday that says when payouts should be blocked.",
+          "experiment_answer": "We block payouts whenever the sanctions screening is still unresolved.",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "sanctions screen",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "unresolved",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "sanctions screen",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "unresolved",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 2,
+          "anchor_version_after_ack": 3
+        },
+        {
+          "query": "Any rule about instant payout eligibility?",
+          "followup_query": "It is the next day and we are continuing yesterday's project context.\nYesterday context should still apply.\nQuestion: Any rule about instant payout eligibility?\nAnswer in one short sentence.",
+          "expected": [
+            "no instant payout",
+            "< 60 days"
+          ],
+          "control_answer": "I can’t find any saved instant payout eligibility rule in yesterday’s recorded context.",
+          "experiment_answer": "Yes—accounts under 60 days old are not eligible for instant payouts.",
+          "control_hit": false,
+          "experiment_hit": false,
+          "control_hit_strict": false,
+          "experiment_hit_strict": false,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 0.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "no instant payout",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "< 60 days",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "no instant payout",
+              "strict_hit": false,
+              "semantic_hit": true
+            },
+            {
+              "token": "< 60 days",
+              "strict_hit": false,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 3,
+          "anchor_version_after_ack": 4
+        }
+      ]
+    },
+    {
+      "case_id": "mlops_01",
+      "domain": "llm-platform-ops",
+      "conversation_id": "default:behavior-mlops_01-af4749",
+      "control_day1_session_id": "ab-control-day1-mlops_01-d420ce7f",
+      "control_day2_session_id": "ab-control-day2-mlops_01-443dea24",
+      "experiment_day1_session_id": "ab-exp-day1-mlops_01-e34abadf",
+      "experiment_day2_session_id": "ab-exp-day2-mlops_01-baa601c7",
+      "pre_compaction_anchor_version": 1,
+      "compact_control_reply": "Compacted context (session-only facts):\n\n- You operate an **internal LLM gateway for enterprise teams**.\n- **Default coding model route:** `gpt-5.3-codex`.\n- **Fallback route (latency spikes):** `gpt-4.1-mini`.\n- **Chat endpoint P95 latency target:** under **4.5s**.\n- **Hard timeout policy:** **20s** with **graceful degrade** response.\n- **Context compaction:** enabled for long threads.\n- **Ordering rule:** memory flush runs before auto-compaction when possible.\n- **Base-tier debug trace retention:** **14 days**.\n- **Trace compliance:** PII must be masked before persistence.\n- **Production change policy:** start with **10% canary traffic**.\n- **Rollback trigger:** error-rate increase above **2.5%**.\n- **Open issue:** improve continuity after compaction for follow-up questions.\n\nContinuity recall checks already validated:\n- Hard timeout → **20 seconds + graceful degrade**\n- Rollback trigger → **error rate > 2.5%**\n- Debug retention → **14 days**",
+      "compact_experiment_reply": "Compact recap of this session’s established facts:\n\n- You operate an **internal LLM gateway for enterprise teams**.\n- **Default coding model route:** `gpt-5.3-codex`.\n- **Fallback model route (latency spikes):** `gpt-4.1-mini`.\n- **Chat endpoint P95 latency target:** **< 4.5 seconds**.\n- **Hard timeout policy:** **20 seconds** with **graceful degrade** response.\n- **Context compaction:** enabled for long threads.\n- **Order preference:** memory flush runs before auto-compaction when possible.\n- **Base-tier debug trace retention:** **14 days**.\n- **Trace policy:** PII must be masked before persistence.\n- **Production change policy:** require **10% traffic canary first**.\n- **Rollback trigger:** error-rate increase **above 2.5%**.\n- **Open issue:** improve continuity after compaction for follow-up questions.",
+      "rows": [
+        {
+          "query": "What is our hard timeout policy?",
+          "followup_query": "It is the next day and we are continuing yesterday's project context.\nYesterday context should still apply.\nQuestion: What is our hard timeout policy?\nAnswer in one short sentence.",
+          "expected": [
+            "20 seconds",
+            "graceful degrade"
+          ],
+          "control_answer": "We don’t have a documented hard timeout policy in memory yet.",
+          "experiment_answer": "Our hard timeout policy is **20 seconds**, followed by a graceful-degrade response if exceeded.",
+          "control_hit": false,
+          "experiment_hit": false,
+          "control_hit_strict": false,
+          "experiment_hit_strict": false,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 0.5,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "20 seconds",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "graceful degrade",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "20 seconds",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "graceful degrade",
+              "strict_hit": false,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 1,
+          "anchor_version_after_ack": 2
+        },
+        {
+          "query": "What rollback trigger did we define?",
+          "followup_query": "It is the next day and we are continuing yesterday's project context.\nYesterday context should still apply.\nQuestion: What rollback trigger did we define?\nAnswer in one short sentence.",
+          "expected": [
+            "error rate",
+            "2.5%"
+          ],
+          "control_answer": "We haven’t documented a rollback trigger in memory yet.",
+          "experiment_answer": "We defined the rollback trigger as an **error rate reaching 2.5%**.",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "error rate",
+              "strict_hit": false,
+              "semantic_hit": false
+            },
+            {
+              "token": "2.5%",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "error rate",
+              "strict_hit": true,
+              "semantic_hit": true
+            },
+            {
+              "token": "2.5%",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 2,
+          "anchor_version_after_ack": 3
+        },
+        {
+          "query": "How long do we retain debug traces in base tier?",
+          "followup_query": "It is the next day and we are continuing yesterday's project context.\nYesterday context should still apply.\nQuestion: How long do we retain debug traces in base tier?\nAnswer in one short sentence.",
+          "expected": [
+            "14 days"
+          ],
+          "control_answer": "We don’t have a recorded base-tier debug-trace retention period in memory yet.",
+          "experiment_answer": "In the base tier, we retain debug traces for **14 days** (with PII masked before persistence).",
+          "control_hit": false,
+          "experiment_hit": true,
+          "control_hit_strict": false,
+          "experiment_hit_strict": true,
+          "control_hit_semantic": false,
+          "experiment_hit_semantic": true,
+          "control_coverage_strict": 0.0,
+          "experiment_coverage_strict": 1.0,
+          "control_coverage_semantic": 0.0,
+          "experiment_coverage_semantic": 1.0,
+          "control_token_eval": [
+            {
+              "token": "14 days",
+              "strict_hit": false,
+              "semantic_hit": false
+            }
+          ],
+          "experiment_token_eval": [
+            {
+              "token": "14 days",
+              "strict_hit": true,
+              "semantic_hit": true
+            }
+          ],
+          "anchor_version_used": 3,
+          "anchor_version_after_ack": 4
+        }
+      ]
+    }
+  ],
+  "disclosure": "Behavioral simulation with real /compact and explicit next-day session switch. Dual-track strict+semantic evaluation enabled.",
+  "generated_at": 1772509069
+}
