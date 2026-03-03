@@ -19,10 +19,11 @@ Production-oriented Continuity Anchor implementation for improving OpenClaw conv
 - `mvp/data/` — benchmark datasets (`ab_cases.jsonl`, `ab_cases_quality.jsonl`)
 - `reports/` — generated benchmark outputs
 - `assets/openclaw-continuity-plugin/` — OpenClaw plugin scaffold and integration docs
-- `SPEC.md` — product goals and acceptance targets
-- `TECHNICAL_DESIGN.md` — architecture and current implementation notes
-- `PROJECT.md` — project status and evidence snapshots
-- `PROJECT_STRUCTURE.md` — module map and runtime call flow
+- `docs/` — design, spec, structure map, and operational guidance
+- `docs/SPEC.md` — product goals and acceptance targets
+- `docs/TECHNICAL_DESIGN.md` — architecture and current implementation notes
+- `docs/PROJECT.md` — project status and evidence snapshots
+- `docs/PROJECT_STRUCTURE.md` — module map and runtime call flow
 
 ## Core API Contract
 
@@ -50,8 +51,8 @@ Core package layout:
 - `src/continuity_memory/openclaw_adapter.py` — OpenClaw gateway adapters
 - `src/continuity_memory/tidb_zero.py` — TiDB Zero backend
 
-See `TECHNICAL_DESIGN.md` for sequence diagrams and runtime behavior details.
-See `PROJECT_STRUCTURE.md` for module-level call flow and ownership boundaries.
+See `docs/TECHNICAL_DESIGN.md` for sequence diagrams and runtime behavior details.
+See `docs/PROJECT_STRUCTURE.md` for module-level call flow and ownership boundaries.
 
 ## Runbook
 
