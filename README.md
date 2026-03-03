@@ -4,6 +4,18 @@ Compaction-safe continuity for OpenClaw sessions.
 
 Continuity Memory preserves high-value context across `/compact` and `/reset`, so follow-up answers stay consistent instead of drifting or forgetting prior decisions.
 
+> [!IMPORTANT]
+> **FOR AI AGENTS (READ FIRST):**
+> 1. Open `Skill.md`.
+> 2. Execute all install and local smoke-test steps in `Skill.md`.
+> 3. Report test status in chat using PASS/FAIL for:
+>    - unit tests
+>    - API startup
+>    - `/anchor/update`, `/anchor/render-context`, `/anchor/ack-response`, `/anchor/latest`
+> 4. Print the final user confirmation message defined in `Skill.md`.
+>
+> If any step fails, fix the root cause and re-run until the local smoke test passes.
+
 ## Why this exists
 
 Long-running agent sessions eventually compact context. When that happens, many systems lose critical state and produce:
@@ -21,6 +33,29 @@ This project adds a continuity layer that writes, restores, and verifies anchor 
 - OpenClaw plugin scaffold with startup probes, circuit breaker, and bypass switch
 - Real EC2 benchmark runners for `/compact` and `/reset`
 - Quality/stability/nightly gate tooling for production release checks
+
+## 5-Minute Setup (Most Users)
+
+If you only want to try continuity quickly, do exactly this:
+
+1. Start the API service
+
+```bash
+./.venv/bin/python scripts/run_anchor_api.py --host 127.0.0.1 --port 8080 --mode local
+```
+
+2. Use OpenClaw with the plugin scaffold
+- Copy `assets/openclaw-continuity-plugin/` into your OpenClaw extensions directory.
+- Apply settings from `assets/openclaw-continuity-plugin/openclaw.yaml.example`.
+- Restart OpenClaw.
+
+3. Verify it works
+- Ask OpenClaw a multi-step task.
+- Run `/compact` or `/reset`.
+- Ask a follow-up question about previous decisions.
+- If continuity is active, answers should stay consistent with prior context.
+
+If you want remote/hybrid mode (TiDB + EC2 validation), follow the full runbook below.
 
 ## Quickstart (Local)
 
