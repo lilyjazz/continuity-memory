@@ -1,86 +1,113 @@
 # Continuity Memory
 
-Production-oriented Continuity Anchor implementation for improving OpenClaw conversation continuity after `/compact` and `/reset`.
+Compaction-safe continuity for OpenClaw sessions.
 
-## Current Scope
+Continuity Memory preserves high-value context across `/compact` and `/reset`, so follow-up answers stay consistent instead of drifting or forgetting prior decisions.
 
-- Anchor model + extraction + rendering service (`src/continuity_memory/`)
-- Local and hybrid storage (file store + TiDB Zero remote backend)
-- HTTP API for update/render/ack flows (`/anchor/*`)
-- API hardening layer (token auth, tenant scope checks, rate limit)
-- OpenClaw adapters and remote EC2 benchmark runners
-- Behavioral A/B benchmark matrix for real `/compact` and `/reset`
-- Quality/stability gate tooling and OpenClaw plugin scaffold
+## Why this exists
 
-## Key Directories
+Long-running agent sessions eventually compact context. When that happens, many systems lose critical state and produce:
+- "I don't remember" responses
+- off-topic follow-up answers
+- contradictions against previously confirmed facts
 
-- `src/continuity_memory/` — core implementation
-- `scripts/` — local/remote runners, matrix, stability loop, nightly gate
-- `mvp/data/` — benchmark datasets (`ab_cases.jsonl`, `ab_cases_quality.jsonl`)
-- `reports/` — generated benchmark outputs
-- `assets/openclaw-continuity-plugin/` — OpenClaw plugin scaffold and integration docs
-- `docs/` — design, spec, structure map, and operational guidance
-- `docs/SPEC.md` — product goals and acceptance targets
-- `docs/TECHNICAL_DESIGN.md` — architecture and current implementation notes
-- `docs/PROJECT.md` — project status and evidence snapshots
-- `docs/PROJECT_STRUCTURE.md` — module map and runtime call flow
+This project adds a continuity layer that writes, restores, and verifies anchor state around compaction/reset boundaries.
 
-## Core API Contract
+## What you get
 
+- Continuity Anchor model (`state`, `facts`, `intent`, reliability metadata)
+- Local + hybrid storage (file store + TiDB Zero remote fallback)
+- Hardened anchor API (`/anchor/*`) with auth, tenant scope, and rate limiting
+- OpenClaw plugin scaffold with startup probes, circuit breaker, and bypass switch
+- Real EC2 benchmark runners for `/compact` and `/reset`
+- Quality/stability/nightly gate tooling for production release checks
+
+## Quickstart (Local)
+
+Run tests first:
+
+```bash
+PYTHONPATH=src ./.venv/bin/python -m unittest discover -s tests
+```
+
+Start the anchor API service:
+
+```bash
+./.venv/bin/python scripts/run_anchor_api.py --host 127.0.0.1 --port 8080 --mode local
+```
+
+Then use OpenClaw integration (plugin or script harness) to call:
 - `POST /anchor/update`
-- `GET /anchor/latest?conversation_id=...`
 - `POST /anchor/render-context`
 - `POST /anchor/ack-response`
 
-Operational endpoints:
+## Proof (Current Benchmarks)
 
-- `GET /health`
-- `GET /metrics` (admin when security enabled)
-- `GET /alerts/slo` (admin when security enabled)
+From real EC2 behavioral runs:
+- Compact strict delta: `+0.6667`
+- Reset strict delta: `+0.6667`
+- Compact/reset semantic delta: `+0.8889`
 
-## Project Structure
+See evidence:
+- `reports/openclaw_remote_behavioral_matrix.json`
+- `reports/openclaw_remote_behavioral_compact_ab_results.json`
+- `reports/openclaw_remote_behavioral_reset_ab_results.json`
 
-Core package layout:
+## Adoption Path
 
-- `src/continuity_memory/models.py` — anchor schema and serialization
-- `src/continuity_memory/extractor.py` — anchor extraction + checksum
-- `src/continuity_memory/storage.py` — local/hybrid storage, durable retry queue, worker
-- `src/continuity_memory/service.py` — continuity logic, metrics, SLO evaluation
-- `src/continuity_memory/api_security.py` — API security config, auth context, limiter
-- `src/continuity_memory/http_api.py` — HTTP server and endpoint handlers
-- `src/continuity_memory/openclaw_adapter.py` — OpenClaw gateway adapters
-- `src/continuity_memory/tidb_zero.py` — TiDB Zero backend
+1. **Evaluate locally**
+   - run unit tests and local API
+2. **Validate on remote OpenClaw**
+   - run behavioral matrix on EC2
+3. **Harden operations**
+   - enable API security + tenant scoping + retry worker
+4. **Gate releases**
+   - run quality suites + stability loop + nightly gate
 
-See `docs/TECHNICAL_DESIGN.md` for sequence diagrams and runtime behavior details.
-See `docs/PROJECT_STRUCTURE.md` for module-level call flow and ownership boundaries.
+Key commands:
+- Matrix: `scripts/run_openclaw_remote_behavioral_matrix.py`
+- Stability: `scripts/run_openclaw_remote_stability_loop.py`
+- Nightly gate: `scripts/run_openclaw_remote_nightly_gate.py`
 
-## Runbook
+## OpenClaw Integration
 
-1. Local regression:
-   - `PYTHONPATH=src ./.venv/bin/python -m unittest discover -s tests`
-2. Real EC2 compact+reset matrix:
-   - `./.venv/bin/python scripts/run_openclaw_remote_behavioral_matrix.py --ec2-host <host> --ec2-user ubuntu --ec2-key <pem> --openclaw-path openclaw --mode hybrid --remote-backend tidb-zero --tidb-zero-file tidb-cloud-zero.json`
-3. Quality dataset suites:
-   - `./.venv/bin/python scripts/run_openclaw_remote_behavioral_ab.py --data mvp/data/ab_cases_quality.jsonl ...`
-   - `./.venv/bin/python scripts/run_openclaw_remote_behavioral_reset_ab.py --data mvp/data/ab_cases_quality.jsonl ...`
-4. Stability loop:
-   - `./.venv/bin/python scripts/run_openclaw_remote_stability_loop.py --data mvp/data/ab_cases_quality.jsonl --max-cases 1 --rounds 2 ...`
-5. Nightly gate:
-   - `./.venv/bin/python scripts/run_openclaw_remote_nightly_gate.py --data mvp/data/ab_cases_quality.jsonl --stability-rounds 5 ...`
+Default integration scaffold:
+- `assets/openclaw-continuity-plugin/index.ts`
+- `assets/openclaw-continuity-plugin/openclaw.plugin.json`
+- `assets/openclaw-continuity-plugin/openclaw.yaml.example`
 
-## Latest Result Pointers
+Setup guide:
+- `assets/openclaw-continuity-plugin/README.md`
 
-- Existing behavioral matrix: `reports/openclaw_remote_behavioral_matrix.json`
-- Quality compact suite: `reports/openclaw_remote_behavioral_quality_compact_ab_results.json`
-- Quality reset suite: `reports/openclaw_remote_behavioral_quality_reset_ab_results.json`
-- Stability loop: `reports/openclaw_remote_stability_loop_results.json`
-- Nightly gate: `reports/openclaw_remote_nightly_gate_results.json`
+## Repository Map
 
-## OpenClaw Default Integration
+- `src/continuity_memory/` - core implementation
+- `scripts/` - runners and gate tooling
+- `reports/` - generated benchmark evidence
+- `mvp/data/` - benchmark datasets
+- `docs/` - spec, design, structure, SLO runbooks
 
-Use the plugin scaffold under `assets/openclaw-continuity-plugin/` to enable continuity by default in OpenClaw without per-query wrapper scripts.
+Start here in docs:
+- `docs/README.md`
+- `docs/SPEC.md`
+- `docs/TECHNICAL_DESIGN.md`
+- `docs/PROJECT_STRUCTURE.md`
+- `docs/SLO_ALERTING.md`
 
-- Manifest: `assets/openclaw-continuity-plugin/openclaw.plugin.json`
-- Hook implementation: `assets/openclaw-continuity-plugin/index.ts`
-- Example OpenClaw config: `assets/openclaw-continuity-plugin/openclaw.yaml.example`
-- Setup docs: `assets/openclaw-continuity-plugin/README.md`
+## Project Status
+
+Status: active development, P0 hardening delivered.
+
+Near-term focus:
+- broader quality datasets
+- stronger production rollout playbooks
+- tighter SLO and alert automation
+
+## Contributing
+
+Issues and PRs are welcome.
+
+If you want to contribute, start with:
+1. `docs/SPEC.md` for acceptance goals
+2. `docs/TECHNICAL_DESIGN.md` for architecture constraints
+3. `docs/SLO_ALERTING.md` for operational expectations
