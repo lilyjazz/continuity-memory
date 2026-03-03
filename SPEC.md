@@ -108,6 +108,16 @@
 
 说明：TiDB 在 P0 的作用是“跨实例连续性保险丝”，不是全量 memory 平台替代。
 
+当前实现补充：
+- `local` 当前实现为本地 JSON 版本文件（`FileAnchorStore`）
+- `hybrid` 当前实现为 `FileAnchorStore + TiDBZeroRemoteBackend`
+- hybrid 失败写入进入持久化 `pending_retry` 队列，支持后台 worker + `flush_retry` 补偿
+
+P0 安全与运维补充：
+- `/anchor/*` 支持 token 鉴权、租户前缀校验、限流（可配置）
+- 提供 `/metrics` 与 `/alerts/slo` 运维端点（安全模式下 admin 访问）
+- OpenClaw 插件支持 startup probe、circuit breaker、快速 bypass 开关
+
 ---
 
 ## 9) Acceptance Metrics (P0)
@@ -132,6 +142,18 @@
 3. **Topic Shift Stress**：多次话题切换后回问旧主题
 4. **Contradiction Check**：故意插入旧事实干扰，验证不冲突
 5. **Latency Under Load**：并发下恢复延迟
+
+当前可执行测试资产：
+- `scripts/run_openclaw_remote_behavioral_ab.py`（真实 `/compact`）
+- `scripts/run_openclaw_remote_behavioral_reset_ab.py`（真实 `/reset`）
+- `scripts/run_openclaw_remote_behavioral_matrix.py`（compact + reset 矩阵）
+- `scripts/run_openclaw_remote_stability_loop.py`（稳定性轮跑）
+- `scripts/run_openclaw_remote_nightly_gate.py`（质量门禁）
+- `mvp/data/ab_cases_quality.jsonl`（扩展质量数据集）
+
+评估模式：
+- strict：严格 token 命中
+- semantic：语义变体命中（含数值/单位别名与中英文 token）
 
 ---
 
@@ -159,6 +181,13 @@
 2. Contradiction Rate <= 2%
 3. P95 额外延迟 <= 1s
 4. 真实会话回放 >= 3 组通过
+
+当前工程门禁补充（nightly）：
+- compact strict delta >= 0.20
+- reset strict delta >= 0.20
+- compact semantic delta >= 0.30
+- reset semantic delta >= 0.30
+- stability pass rate = 1.0
 
 不满足则不扩 scope，先修连续性质量。
 

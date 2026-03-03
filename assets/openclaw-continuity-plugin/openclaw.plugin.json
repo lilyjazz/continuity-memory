@@ -1,0 +1,146 @@
+{
+  "id": "continuity-anchor",
+  "kind": "memory",
+  "uiHints": {
+    "enabled": {
+      "label": "Enable Continuity",
+      "help": "Master switch for continuity plugin logic"
+    },
+    "bypassContinuity": {
+      "label": "Bypass Continuity",
+      "help": "Fast bypass switch to disable continuity requests without unloading plugin"
+    },
+    "tenantId": {
+      "label": "Tenant ID",
+      "help": "Tenant namespace used for conversation scope and headers",
+      "placeholder": "default"
+    },
+    "apiToken": {
+      "label": "Anchor API Token",
+      "help": "Bearer token for /anchor API authentication",
+      "sensitive": true,
+      "placeholder": "replace-with-token"
+    },
+    "apiBaseUrl": {
+      "label": "Anchor API Base URL",
+      "help": "Base URL for continuity-memory HTTP API",
+      "placeholder": "http://127.0.0.1:8080"
+    },
+    "requestTimeoutMs": {
+      "label": "API Timeout (ms)",
+      "help": "Timeout for each anchor API request",
+      "placeholder": "1500",
+      "advanced": true
+    },
+    "conversationPrefix": {
+      "label": "Conversation Prefix",
+      "help": "Prefix applied to OpenClaw session id when creating conversation_id",
+      "placeholder": "cca-",
+      "advanced": true
+    },
+    "autoStartApi": {
+      "label": "Auto-start Anchor API",
+      "help": "Start continuity anchor API process from plugin service"
+    },
+    "apiCommand": {
+      "label": "API Command",
+      "help": "Command used to start continuity API when autoStartApi=true",
+      "placeholder": "python3",
+      "advanced": true
+    },
+    "healthPath": {
+      "label": "Health Path",
+      "help": "API health endpoint path used for startup probe",
+      "placeholder": "/health",
+      "advanced": true
+    },
+    "startupProbeAttempts": {
+      "label": "Startup Probe Attempts",
+      "help": "How many health checks before plugin opens bypass",
+      "placeholder": "8",
+      "advanced": true
+    },
+    "circuitBreakerFailureThreshold": {
+      "label": "Circuit Breaker Failures",
+      "help": "Consecutive failures before continuity calls are temporarily bypassed",
+      "placeholder": "5",
+      "advanced": true
+    }
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": {
+        "type": "boolean"
+      },
+      "bypassContinuity": {
+        "type": "boolean"
+      },
+      "tenantId": {
+        "type": "string"
+      },
+      "apiToken": {
+        "type": "string"
+      },
+      "apiBaseUrl": {
+        "type": "string"
+      },
+      "requestTimeoutMs": {
+        "type": "number",
+        "minimum": 100,
+        "maximum": 20000
+      },
+      "conversationPrefix": {
+        "type": "string"
+      },
+      "updateOnCompaction": {
+        "type": "boolean"
+      },
+      "updateOnReset": {
+        "type": "boolean"
+      },
+      "autoStartApi": {
+        "type": "boolean"
+      },
+      "apiCommand": {
+        "type": "string"
+      },
+      "apiCommandArgs": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "apiEnv": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "startupProbeAttempts": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 30
+      },
+      "startupProbeDelayMs": {
+        "type": "number",
+        "minimum": 100,
+        "maximum": 10000
+      },
+      "healthPath": {
+        "type": "string"
+      },
+      "circuitBreakerFailureThreshold": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 100
+      },
+      "circuitBreakerCooldownMs": {
+        "type": "number",
+        "minimum": 1000,
+        "maximum": 600000
+      }
+    }
+  }
+}

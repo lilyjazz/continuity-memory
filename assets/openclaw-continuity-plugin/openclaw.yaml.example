@@ -1,0 +1,48 @@
+plugins:
+  load:
+    paths:
+      - "/opt/openclaw/extensions"
+
+  entries:
+    continuity-anchor:
+      enabled: true
+      config:
+        enabled: true
+        bypassContinuity: false
+        tenantId: "default"
+        apiToken: "replace-with-strong-token"
+        apiBaseUrl: "http://127.0.0.1:8080"
+        requestTimeoutMs: 1500
+        conversationPrefix: "cca-"
+        updateOnCompaction: true
+        updateOnReset: true
+        startupProbeAttempts: 8
+        startupProbeDelayMs: 500
+        healthPath: "/health"
+        circuitBreakerFailureThreshold: 5
+        circuitBreakerCooldownMs: 30000
+        autoStartApi: true
+        apiCommand: "python3"
+        apiCommandArgs:
+          - "/opt/continuity-memory/scripts/run_anchor_api.py"
+          - "--host"
+          - "127.0.0.1"
+          - "--port"
+          - "8080"
+          - "--retry-worker-enabled"
+          - "--retry-worker-interval"
+          - "2.0"
+          - "--api-security-enabled"
+          - "--api-token"
+          - "replace-with-strong-token:default"
+          - "--api-admin-token"
+          - "replace-with-strong-token"
+          - "--mode"
+          - "hybrid"
+          - "--remote-backend"
+          - "tidb-zero"
+          - "--tidb-zero-file"
+          - "/opt/continuity-memory/tidb-cloud-zero.json"
+
+  slots:
+    memory: "continuity-anchor"
