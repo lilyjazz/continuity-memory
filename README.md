@@ -5,16 +5,7 @@ Compaction-safe continuity for OpenClaw sessions.
 Continuity Memory preserves high-value context across `/compact` and `/reset`, so follow-up answers stay consistent instead of drifting or forgetting prior decisions.
 
 > [!IMPORTANT]
-> **FOR AI AGENTS (READ FIRST):**
-> 1. Open `Skill.md`.
-> 2. Execute all install and local smoke-test steps in `Skill.md`.
-> 3. Report test status in chat using PASS/FAIL for:
->    - unit tests
->    - API startup
->    - `/anchor/update`, `/anchor/render-context`, `/anchor/ack-response`, `/anchor/latest`
-> 4. Print the final user confirmation message defined in `Skill.md`.
->
-> If any step fails, fix the root cause and re-run until the local smoke test passes.
+> **FOR AI AGENTS:** Read and follow `Skill.md` end-to-end, then report your installation results and provide brief post-install guidance. All testing/self-check steps are defined in `Skill.md` and must be run there.
 
 ## Why this exists
 
