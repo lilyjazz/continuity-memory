@@ -9,7 +9,7 @@ Continuity Memory preserves high-value context across `/compact` and `/reset`, s
 ```
 https://github.com/lilyjazz/continuity-memory/blob/master/Skill.md
 Read and follow this doc end-to-end, then report your installation results and provide brief post-install guidance.
-All testing/self-check steps are defined in `Skill.md` and must be run there.
+All required smoke-check steps are defined in `Skill.md` and must be run there.
 ```
 
 ## Why this exists
