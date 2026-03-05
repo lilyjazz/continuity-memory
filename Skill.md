@@ -148,6 +148,39 @@ If something fails, check in this order:
 3. JSON payload uses `conversation_id` with tenant prefix (`default:`)
 4. Re-run unit tests before retrying smoke requests
 
+### Common Blocker: `python3 -m venv .venv` fails (`ensurepip is unavailable`)
+
+If you see this error, Python venv support is missing on the host.
+
+#### Ubuntu/Debian (with sudo)
+
+```bash
+sudo apt-get update
+sudo apt-get install -y python3-venv python3-pip
+# If your interpreter is 3.12 and still failing:
+sudo apt-get install -y python3.12-venv
+```
+
+Then recreate the environment and continue:
+
+```bash
+rm -rf .venv
+python3 -m venv .venv
+./.venv/bin/python -m pip install --upgrade pip
+./.venv/bin/python -m pip install pymysql
+```
+
+#### No sudo permission fallback
+
+```bash
+python3 -m pip install --user virtualenv
+python3 -m virtualenv .venv
+./.venv/bin/python -m pip install --upgrade pip
+./.venv/bin/python -m pip install pymysql
+```
+
+After either fix path, continue from Step 3 (unit tests) in this document.
+
 ---
 
 ## Copy-Paste Prompt for OpenClaw
