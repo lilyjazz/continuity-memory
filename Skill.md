@@ -1,29 +1,31 @@
-# Continuity Memory Local Install + Smoke Test Skill
+# Continuity Memory Local Install + Smoke Skill (No Unit-Test Path)
 
-This document is written for OpenClaw (or another coding agent) to autonomously install and run a first local validation of this project.
+This skill is for OpenClaw (or another coding agent) to autonomously install and run a **minimal local smoke validation**.
 
 ## Objective
 
-Set up the project on a local machine and complete an initial smoke test that proves:
+Complete a local setup that proves:
+1. Anchor API starts.
+2. `/anchor/update` works.
+3. `/anchor/render-context` works.
+4. `/anchor/ack-response` works.
+5. `/anchor/latest` returns the anchor.
 
-1. Unit tests pass.
-2. Anchor API starts successfully.
-3. `/anchor/update` -> `/anchor/render-context` -> `/anchor/ack-response` works end-to-end.
+This skill intentionally avoids unit-test execution to reduce setup blockers.
 
 ---
 
 ## Preconditions
 
 - macOS/Linux shell
-- `python3` available (3.10+ recommended)
+- `python3` available
 - `git` available
-- optional: `openclaw` CLI if you also want plugin-level integration smoke
 
 ---
 
 ## Step-by-Step Execution
 
-Run these commands in order from repo root.
+Run commands from repository root.
 
 ### 1) Clone and enter repo
 
@@ -32,54 +34,33 @@ git clone https://github.com/lilyjazz/continuity-memory.git
 cd continuity-memory
 ```
 
-### 2) Create virtual environment and install minimal dependencies
+### 2) Prepare Python runtime (minimal dependency path)
 
-Before installing, do a local pre-check to avoid unnecessary downloads.
+Use venv if available. If venv is unavailable, use system Python directly.
 
 ```bash
-if [ -x ./.venv/bin/python ]; then
-  echo "[precheck] existing virtualenv found"
+if python3 -m venv .venv 2>/dev/null; then
+  PY=./.venv/bin/python
+  echo "[runtime] using venv: $PY"
 else
-  echo "[precheck] creating virtualenv"
-  python3 -m venv .venv
-fi
-
-if ./.venv/bin/python -c "import pymysql" 2>/dev/null; then
-  echo "[precheck] pymysql already installed"
-else
-  echo "[precheck] installing pymysql"
-  ./.venv/bin/python -m pip install --upgrade pip
-  ./.venv/bin/python -m pip install pymysql
+  PY=python3
+  echo "[runtime] venv unavailable, using system python: $PY"
 fi
 ```
 
-Equivalent always-safe install commands (idempotent) are below:
+No extra package installation is required for local smoke mode.
+
+### 3) Start anchor API (terminal A)
 
 ```bash
-python3 -m venv .venv
-./.venv/bin/python -m pip install --upgrade pip
-./.venv/bin/python -m pip install pymysql
+$PY scripts/run_anchor_api.py --host 127.0.0.1 --port 8080 --mode local
 ```
 
-### 3) Run full unit tests
+Keep terminal A running.
 
-```bash
-PYTHONPATH=src ./.venv/bin/python -m unittest discover -s tests
-```
+### 4) Run smoke flow (terminal B)
 
-Expected: all tests pass (current baseline is 38 tests).
-
-### 4) Start anchor API (local mode)
-
-```bash
-./.venv/bin/python scripts/run_anchor_api.py --host 127.0.0.1 --port 8080 --mode local
-```
-
-Keep this process running in terminal A.
-
-### 5) In terminal B, run API smoke test
-
-#### 5.1 Update anchor
+#### 4.1 `/anchor/update`
 
 ```bash
 curl -sS -X POST http://127.0.0.1:8080/anchor/update \
@@ -94,7 +75,7 @@ curl -sS -X POST http://127.0.0.1:8080/anchor/update \
   }'
 ```
 
-#### 5.2 Render continuity context
+#### 4.2 `/anchor/render-context`
 
 ```bash
 curl -sS -X POST http://127.0.0.1:8080/anchor/render-context \
@@ -105,7 +86,7 @@ curl -sS -X POST http://127.0.0.1:8080/anchor/render-context \
   }'
 ```
 
-#### 5.3 Ack response
+#### 4.3 `/anchor/ack-response`
 
 ```bash
 curl -sS -X POST http://127.0.0.1:8080/anchor/ack-response \
@@ -117,117 +98,77 @@ curl -sS -X POST http://127.0.0.1:8080/anchor/ack-response \
   }'
 ```
 
-#### 5.4 Read latest anchor
+#### 4.4 `/anchor/latest`
 
 ```bash
 curl -sS "http://127.0.0.1:8080/anchor/latest?conversation_id=default:local-smoke-001"
 ```
 
-Expected: valid JSON responses, increasing `anchor_version`, and non-empty continuity context block.
+Expected: valid JSON responses, and `anchor_version` is present/readable.
 
 ---
 
-## Optional: OpenClaw Plugin Smoke Test
+## Failure Recovery
 
-If OpenClaw is installed locally, use:
+### A) `python3 -m venv .venv` fails (`ensurepip is unavailable`)
 
-- `assets/openclaw-continuity-plugin/openclaw.plugin.json`
-- `assets/openclaw-continuity-plugin/openclaw.yaml.example`
-- `assets/openclaw-continuity-plugin/README.md`
+Use the no-venv path in this skill (`PY=python3`) and continue.
 
-Then run one conversation, execute `/compact` or `/reset`, and verify follow-up answers keep earlier facts.
-
----
-
-## Failure Recovery Checklist
-
-If something fails, check in this order:
-
-1. Python path and venv usage (`./.venv/bin/python`)
-2. API process is still running on `127.0.0.1:8080`
-3. JSON payload uses `conversation_id` with tenant prefix (`default:`)
-4. Re-run unit tests before retrying smoke requests
-
-### Common Blocker: `python3 -m venv .venv` fails (`ensurepip is unavailable`)
-
-If you see this error, Python venv support is missing on the host.
-
-#### Ubuntu/Debian (with sudo)
+If you want to fix venv support anyway (Ubuntu/Debian):
 
 ```bash
 sudo apt-get update
 sudo apt-get install -y python3-venv python3-pip
-# If your interpreter is 3.12 and still failing:
-sudo apt-get install -y python3.12-venv
+sudo apt-get install -y python3.12-venv || true
 ```
 
-Then recreate the environment and continue:
+### B) API does not start
 
-```bash
-rm -rf .venv
-python3 -m venv .venv
-./.venv/bin/python -m pip install --upgrade pip
-./.venv/bin/python -m pip install pymysql
-```
+Check:
+1. Python command used (`$PY`)
+2. Port already in use (`127.0.0.1:8080`)
+3. Run from repo root
 
-#### No sudo permission fallback
+### C) Endpoint returns error
 
-```bash
-python3 -m pip install --user virtualenv
-python3 -m virtualenv .venv
-./.venv/bin/python -m pip install --upgrade pip
-./.venv/bin/python -m pip install pymysql
-```
-
-After either fix path, continue from Step 3 (unit tests) in this document.
+Check:
+1. API process still running
+2. JSON payload format
+3. `conversation_id` includes tenant prefix (`default:`)
 
 ---
 
 ## Copy-Paste Prompt for OpenClaw
 
-Use the following prompt directly in OpenClaw:
-
 ```text
-You are executing the Continuity Memory local install skill.
+You are executing Continuity Memory local install + smoke skill.
 
 Goal:
-1) set up the repo locally,
-2) run unit tests,
-3) start anchor API,
-4) run /anchor/update -> /anchor/render-context -> /anchor/ack-response -> /anchor/latest smoke flow,
-5) report exact command outputs and whether smoke test passed.
+1) setup local runtime with minimal dependencies,
+2) start anchor API,
+3) run /anchor/update -> /anchor/render-context -> /anchor/ack-response -> /anchor/latest,
+4) report endpoint-level PASS/FAIL and final verdict.
 
 Constraints:
-- Always run a dependency pre-check before install/download steps.
-- Do not ask for confirmation unless blocked by missing system dependencies.
-- Use the exact commands from Skill.md.
-- If a command fails, fix the root cause and retry.
-- At the end, return a concise checklist with pass/fail for each step.
+- Do not run unit tests in this flow.
+- Prefer zero extra downloads; use system python fallback if venv support is missing.
+- If a step fails, fix the root cause and retry.
 
 Acceptance:
-- Unit tests pass.
-- API endpoints return valid JSON.
-- Anchor version is created and readable from /anchor/latest.
+- API is running.
+- All four endpoint calls return valid JSON.
+- latest anchor is readable.
 ```
 
 ---
 
-## Deliverable Format (for agent output)
+## Deliverable Format (Required)
 
-When OpenClaw finishes, it should return:
-
-1. Environment summary (`python3 --version`, repo path)
-2. Test result summary
-3. API startup confirmation
-4. Smoke API response summary per endpoint
-5. Final PASS/FAIL verdict
-
-Required test status block (must be included verbatim in structure):
+Return this block:
 
 ```text
-Testing Status
-- Unit tests: PASS/FAIL (include command and total passed count)
-- API startup: PASS/FAIL (include host:port)
+Smoke Status
+- API startup: PASS/FAIL
 - /anchor/update: PASS/FAIL
 - /anchor/render-context: PASS/FAIL
 - /anchor/ack-response: PASS/FAIL
@@ -235,12 +176,12 @@ Testing Status
 - Overall local smoke: PASS/FAIL
 ```
 
-If any line is FAIL, the agent must include:
+If any item is FAIL, include:
 1. root cause,
 2. fix applied,
 3. re-test result.
 
-After the checklist, the agent must print this user-facing confirmation message in chat:
+After the checklist, print:
 
 ```text
 Setup complete. Continuity Memory has been installed and validated locally, and continuity protection is now active.
