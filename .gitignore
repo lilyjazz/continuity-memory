@@ -3,3 +3,5 @@ tidb-cloud-zero.json
 __pycache__/
 *.pyc
 .venv/
+reports/tmp/
+reports/stability_rounds/

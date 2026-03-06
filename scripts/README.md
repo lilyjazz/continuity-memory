@@ -10,5 +10,7 @@
 - `run_openclaw_remote_stability_loop.py` — repeated stability runs
 - `run_openclaw_remote_nightly_gate.py` — quality gate orchestration
 - `run_openclaw_remote_mvp_ab.py` — MVP baseline benchmark
+- `install_global_continuity.sh` — install continuity plugin + global OpenClaw wiring
+- `prune_reports.py` — prune non-canonical generated report artifacts
 
 All scripts keep backward-compatible paths for CI and docs commands.
