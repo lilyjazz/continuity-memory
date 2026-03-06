@@ -12,6 +12,22 @@ Read and follow this doc end-to-end, then report your installation results and p
 All required smoke-check steps are defined in `Skill.md` and must be run there.
 ```
 
+## Operator Quick Commands
+
+```bash
+# run tests
+make test
+
+# start local API
+make api-local
+
+# run local smoke calls (requires API running)
+make smoke-local
+
+# install continuity globally for OpenClaw on this machine
+make install-global
+```
+
 ## Why this exists
 
 Long-running agent sessions eventually compact context. When that happens, many systems lose critical state and produce:
@@ -99,6 +115,8 @@ Key commands:
 - Matrix: `scripts/run_openclaw_remote_behavioral_matrix.py`
 - Stability: `scripts/run_openclaw_remote_stability_loop.py`
 - Nightly gate: `scripts/run_openclaw_remote_nightly_gate.py`
+- Global install helper: `scripts/install_global_continuity.sh`
+- Report pruning helper: `scripts/prune_reports.py`
 
 ## OpenClaw Integration
 
